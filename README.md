@@ -30,6 +30,6 @@ remotes::install_github("ampel-leipzig/zlog")
 
 You are welcome to:
 
-* submit suggestions and bug-reports at: <https://github.com/ampel-leipzig/zlog/gissues>
-* send a pull request on: <https://github.com/ampel-leipzig/zlog/g>
+* submit suggestions and bug-reports at: <https://github.com/ampel-leipzig/zlog/issues>
+* send a pull request on: <https://github.com/ampel-leipzig/zlog/pulls>
 * compose an e-mail to: <mail@sebastiangibb.de>
