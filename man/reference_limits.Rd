@@ -21,6 +21,9 @@ the reference limits are calculated.}
 \description{
 Calculates the lower and upper reference limit for given probabilities.
 }
+\examples{
+reference_limits(1:10)
+}
 \author{
 Sebastian Gibb
 }

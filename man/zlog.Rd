@@ -29,6 +29,13 @@ The z values is calculated as follows (assuming that the limits where 0.025
 and 0.975 quantiles):
 \eqn{z = (x - (limits_1 + limits_2 )/2) * 3.92/(limits_2 - limits_1)}.
 }
+\examples{
+z(1:10, limits = c(2, 8))
+
+# from Hoffmann et al. 2017
+albumin <- c(42, 34, 38, 43, 50, 42, 27, 31, 24)
+zlog(albumin, limits = c(35, 52))
+}
 \author{
 Sebastian Gibb
 }

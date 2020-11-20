@@ -13,7 +13,7 @@
 #' @author Sebastian Gibb
 #' @importFrom stats setNames quantile
 #' @export
-#' @example
+#' @examples
 #' reference_limits(1:10)
 reference_limits <- function(x, probs = c(0.025, 0.975), na.rm = TRUE) {
     if (!is.numeric(probs) || length(probs) != 2L)

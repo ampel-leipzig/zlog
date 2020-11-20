@@ -18,8 +18,9 @@
 #' @author Sebastian Gibb
 #' @importFrom stats qnorm
 #' @export
-#' @example
+#' @examples
 #' z(1:10, limits = c(2, 8))
+#'
 z <- function(x, limits, probs = c(0.025, 0.975)) {
     if (!is.numeric(limits) || length(limits) != 2L)
         stop("'limits' has to be a numeric of length 2.")
@@ -35,7 +36,7 @@ z <- function(x, limits, probs = c(0.025, 0.975)) {
 
 #' @rdname zlog
 #' @export
-#' @example
+#' @examples
 #' # from Hoffmann et al. 2017
 #' albumin <- c(42, 34, 38, 43, 50, 42, 27, 31, 24)
 #' zlog(albumin, limits = c(35, 52))
