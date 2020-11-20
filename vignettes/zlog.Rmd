@@ -1,0 +1,50 @@
+---
+title: Z(log) Transformation for Laboratory Measurements
+output:
+    rmarkdown::html_vignette:
+        toc_float: true
+vignette: >
+    %\VignetteIndexEntry{Z(log) Transformation for Laboratory Measurements}
+    %\VignetteEngine{knitr::rmarkdown}
+    %\VignetteEncoding{UTF-8}
+bibliography: bibliography.bib
+---
+
+# Introduction
+
+The `zlog` package offers functions to transform laboratory measurements into
+standardised *z* or *z(log)*-values as suggested in [@hoffmann2017].
+Therefore the lower and upper reference limits are needed. If these are not
+known they could estimated from a given sample.
+
+# Z or Z(log) Transformation
+
+Example data and reference limits are taken from [@hoffmann2017, Table 2].
+
+```{r zlog}
+library("zlog")
+
+albumin <- c(42, 34, 38, 43, 50, 42, 27, 31, 24)
+z(albumin, limits = c(35, 52))
+zlog(albumin, limits = c(35, 52))
+```
+
+# Estimate Reference Limits
+
+The `reference_limits` functions calculates the lower and upper 2.5 or 97.5
+(or a user given probability) quantiles:
+
+```{r reference_limits}
+reference_limits(albumin)
+reference_limits(albumin, probs = c(0.05, 0.95))
+
+exp(reference_limits(log(albumin)))
+```
+
+# Session information
+
+```{r si}
+sessionInfo()
+```
+
+# References
