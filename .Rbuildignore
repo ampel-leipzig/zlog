@@ -6,3 +6,5 @@
 ^playground$
 ^revdep$
 ^\.github$
+^_pkgdown\.yml$
+^docs$
