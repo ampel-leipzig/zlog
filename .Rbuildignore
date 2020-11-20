@@ -1,0 +1,7 @@
+^README\.md$
+^\.editorconfig$
+^\.git$
+^\.gitignore$
+^pkgdown$
+^playground$
+^revdep$

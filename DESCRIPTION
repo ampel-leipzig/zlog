@@ -1,0 +1,20 @@
+Package: zlog
+Title: Z(log) Transformation for Laboratory Measurements
+Version: 0.0.1
+Description: Transformation of Laboratory Measurements into z or z(log)-value
+    based on given or empirical reference limits as proposed in
+    Hoffmann et al. 2017 (DOI: 10.1515/labmed-2016-0087).
+Authors@R: person(given = "Sebastian", family = "Gibb",
+                  email = "mail@sebastiangibb.de",
+                  role = c("aut", "cre"),
+		          comment = c(ORCID = "0000-0001-7406-4443"))
+Maintainer: Sebastian Gibb <mail@sebastiangibb.de>
+Depends:
+    R (>= 3.6.0)
+Suggests:
+    testthat
+License: GPL (>= 3)
+LazyData: yes
+Roxygen: list(markdown=TRUE)
+RoxygenNote: 7.1.1
+VignetteBuilder: knitr
