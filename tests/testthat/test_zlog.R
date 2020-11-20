@@ -1,10 +1,19 @@
 test_that("z throws errors", {
     expect_error(z())
-    expect_error(z(1:3))
+    expect_error(z(1:3), "\"limits\" is missing")
     expect_error(z(1:3, limits = "foo"), "numeric")
     expect_error(z(1:3, limits = 1), "length 2")
     expect_error(z(1:3, limits = c(1, 2), probs = "foo"), "numeric")
     expect_error(z(1:3, limits = c(1, 2), probs = 1), "length 2")
+})
+
+test_that("zlog throws errors", {
+    expect_error(zlog())
+    expect_error(zlog(1:3), "\"limits\" is missing")
+    expect_error(zlog(1:3, limits = "foo"), "numeric")
+    expect_error(zlog(1:3, limits = 1), "length 2")
+    expect_error(zlog(1:3, limits = c(1, 2), probs = "foo"), "numeric")
+    expect_error(zlog(1:3, limits = c(1, 2), probs = 1), "length 2")
 })
 
 test_that("z", {
