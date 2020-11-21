@@ -25,9 +25,13 @@ Calculates the z or z(log) values for laboratory measurement standardisation
 as proposed in Hoffmann 2017 et al.
 }
 \details{
-The z values is calculated as follows (assuming that the limits where 0.025
+The z value is calculated as follows (assuming that the limits where 0.025
 and 0.975 quantiles):
 \eqn{z = (x - (limits_1 + limits_2 )/2) * 3.92/(limits_2 - limits_1)}.
+
+The z(log) value is calculated as follows (assuming that the limits where 0.025
+and 0.975 quantiles):
+\eqn{z = (\log(x) - (\log(limits_1) + \log(limits_2))/2) * 3.92/(\log(limits_2) - \log(limits_1))}.
 }
 \examples{
 z(1:10, limits = c(2, 8))

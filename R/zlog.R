@@ -9,9 +9,13 @@
 #' default: `c(0.025, 0.975)` (spanning 95 %).
 #'
 #' @details
-#' The z values is calculated as follows (assuming that the limits where 0.025
+#' The z value is calculated as follows (assuming that the limits where 0.025
 #' and 0.975 quantiles):
 #' \eqn{z = (x - (limits_1 + limits_2 )/2) * 3.92/(limits_2 - limits_1)}.
+#'
+#' The z(log) value is calculated as follows (assuming that the limits where 0.025
+#' and 0.975 quantiles):
+#' \eqn{z = (\log(x) - (\log(limits_1) + \log(limits_2))/2) * 3.92/(\log(limits_2) - \log(limits_1))}.
 #'
 #' @return `numeric`, z or z(log) values.
 #' @rdname zlog
