@@ -74,8 +74,12 @@ d <- data.frame(
     bilirubin = bilirubin,
     zlogb = zlogb
 )
-d$albumin <- cell_spec(d$albumin, background = zcol(zloga), align = "right")
-d$bilirubin <- cell_spec(d$bilirubin, background = zcol(zlogb), align = "right")
+d$albumin <- kableExtra::cell_spec(
+    d$albumin, background = zcol(zloga), align = "right"
+)
+d$bilirubin <- kableExtra::cell_spec(
+    d$bilirubin, background = zcol(zlogb), align = "right"
+)
 kableExtra::kable_classic(
     kableExtra::kbl(
         d,
