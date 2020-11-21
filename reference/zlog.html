@@ -147,9 +147,12 @@ default: <code><a href='https://rdrr.io/r/base/c.html'>c(0.025, 0.975)</a></code
     <p><code>numeric</code>, z or z(log) values.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The z values is calculated as follows (assuming that the limits where 0.025
+    <p>The z value is calculated as follows (assuming that the limits where 0.025
 and 0.975 quantiles):
 \(z = (x - (limits_1 + limits_2 )/2) * 3.92/(limits_2 - limits_1)\).</p>
+<p>The z(log) value is calculated as follows (assuming that the limits where 0.025
+and 0.975 quantiles):
+\(z = (\log(x) - (\log(limits_1) + \log(limits_2))/2) * 3.92/(\log(limits_2) - \log(limits_1))\).</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Hoffmann, Georg, Frank Klawonn, Ralf Lichtinghagen, and Matthias Orth.
