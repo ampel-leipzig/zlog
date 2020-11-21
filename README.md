@@ -16,6 +16,8 @@ Transformation of Laboratory Measurements into z(log)-values
 z(log)-values based on given or empirical reference limits as proposed in
 [Hoffmann et al. 2017](https://doi.org/10.1515/labmed-2016-0087).
 
+Basic usage: https://ampel-leipzig.github.io/zlog/articles/zlog.html
+
 ## Install
 
 Currently this package is in development and just available via the github
