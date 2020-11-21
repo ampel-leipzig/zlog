@@ -64,7 +64,8 @@
       
 
       </header><script src="zlog_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="zlog_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
-<script src="zlog_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
+<script src="zlog_files/anchor-sections-1.0/anchor-sections.js"></script><script src="zlog_files/kePrint-0.0.1/kePrint.js"></script><link href="zlog_files/lightable-0.0.1/lightable.css" rel="stylesheet">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Z(log) Transformation for Laboratory Measurements</h1>
@@ -85,7 +86,7 @@
 <div id="z-or-zlog-transformation" class="section level1">
 <h1 class="hasAnchor">
 <a href="#z-or-zlog-transformation" class="anchor"></a>Z or Z(log) Transformation</h1>
-<p>Example data and reference limits are taken from <span class="citation">(Hoffmann et al. 2017, Table 2)</span>.</p>
+<p>Example data and reference limits are taken from <span class="citation">Hoffmann et al. (2017)</span>, Table 2.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st">"zlog"</span><span class="op">)</span>
 
@@ -115,6 +116,190 @@
 <pre><code>##    lower    upper 
 ## 24.57207 48.51429</code></pre>
 </div>
+<div id="zlog-dependent-colour-gradient" class="section level1">
+<h1 class="hasAnchor">
+<a href="#zlog-dependent-colour-gradient" class="anchor"></a>Z(log) Dependent Colour Gradient</h1>
+<p><span class="citation">Hoffmann et al. (2017)</span> suggested a colour gradient to visualise laboratory measurements for the user.</p>
+<p><img src="zlog_files/figure-html/zcol-1.png" width="95%" style="display: block; margin: auto;"></p>
+<p>It could be used to highlight the values in a table:</p>
+<table class="table  lightable-classic">
+<caption>
+Table reproduced from <span class="citation">Hoffmann et al. (2017)</span>, Table 2, limits used: albumin 35-52 g/l, bilirubin 2-21 µmol/l.
+</caption>
+<thead><tr>
+<th style="text-align:left;">
+Category
+</th>
+<th style="text-align:left;">
+albumin
+</th>
+<th style="text-align:right;">
+zlog(albumin)
+</th>
+<th style="text-align:left;">
+bilirubin
+</th>
+<th style="text-align:right;">
+zlog(bilirubin)
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+blood donor
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FDFDFE !important;text-align: right;">42</span>
+</td>
+<td style="text-align:right;">
+-0.15
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFCFA !important;text-align: right;">11</span>
+</td>
+<td style="text-align:right;">
+0.88
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+blood donor
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #F3F6FA !important;text-align: right;">34</span>
+</td>
+<td style="text-align:right;">
+-2.25
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFDFC !important;text-align: right;">9</span>
+</td>
+<td style="text-align:right;">
+0.55
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+blood donor
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FBFCFD !important;text-align: right;">38</span>
+</td>
+<td style="text-align:right;">
+-1.15
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #F6F8FB !important;text-align: right;">2</span>
+</td>
+<td style="text-align:right;">
+-1.96
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hepatitis without cirrhosis
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFEFD !important;text-align: right;">43</span>
+</td>
+<td style="text-align:right;">
+0.08
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FDFDFE !important;text-align: right;">5</span>
+</td>
+<td style="text-align:right;">
+-0.43
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hepatitis without cirrhosis
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFAF6 !important;text-align: right;">50</span>
+</td>
+<td style="text-align:right;">
+1.57
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEF8F2 !important;text-align: right;">22</span>
+</td>
+<td style="text-align:right;">
+2.04
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hepatitis without cirrhosis
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FDFDFE !important;text-align: right;">42</span>
+</td>
+<td style="text-align:right;">
+-0.15
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FDEDDD !important;text-align: right;">42</span>
+</td>
+<td style="text-align:right;">
+3.12
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hepatitis with cirrhosis
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #B7CBE4 !important;text-align: right;">27</span>
+</td>
+<td style="text-align:right;">
+-4.53
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FDF0E3 !important;text-align: right;">37</span>
+</td>
+<td style="text-align:right;">
+2.90
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hepatitis with cirrhosis
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #E5ECF5 !important;text-align: right;">31</span>
+</td>
+<td style="text-align:right;">
+-3.16
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #F8A453 !important;text-align: right;">200</span>
+</td>
+<td style="text-align:right;">
+5.72
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hepatitis with cirrhosis
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #83A4D0 !important;text-align: right;">24</span>
+</td>
+<td style="text-align:right;">
+-5.70
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEF9F4 !important;text-align: right;">20</span>
+</td>
+<td style="text-align:right;">
+1.88
+</td>
+</tr>
+</tbody>
+</table>
+</div>
 <div id="session-information" class="section level1">
 <h1 class="hasAnchor">
 <a href="#session-information" class="anchor"></a>Session information</h1>
@@ -138,12 +323,15 @@
 ## [1] zlog_0.0.1
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] digest_0.6.27     crayon_1.3.4      rprojroot_2.0.2   assertthat_0.2.1 
-##  [5] R6_2.5.0          magrittr_2.0.1    evaluate_0.14     stringi_1.5.3    
-##  [9] rlang_0.4.8       fs_1.5.0          ragg_0.4.0        rmarkdown_2.5    
-## [13] pkgdown_1.6.1     textshaping_0.2.1 desc_1.2.0        tools_4.0.3      
-## [17] stringr_1.4.0     yaml_2.2.1        xfun_0.19         compiler_4.0.3   
-## [21] systemfonts_0.3.2 memoise_1.1.0     htmltools_0.5.0   knitr_1.30</code></pre>
+##  [1] rstudioapi_0.13   knitr_1.30        xml2_1.3.2        magrittr_2.0.1   
+##  [5] munsell_0.5.0     rvest_0.3.6       viridisLite_0.3.0 colorspace_2.0-0 
+##  [9] R6_2.5.0          ragg_0.4.0        rlang_0.4.8       stringr_1.4.0    
+## [13] httr_1.4.2        tools_4.0.3       webshot_0.5.2     xfun_0.19        
+## [17] htmltools_0.5.0   systemfonts_0.3.2 yaml_2.2.1        assertthat_0.2.1 
+## [21] rprojroot_2.0.2   digest_0.6.27     lifecycle_0.2.0   pkgdown_1.6.1    
+## [25] crayon_1.3.4      textshaping_0.2.1 kableExtra_1.3.1  fs_1.5.0         
+## [29] memoise_1.1.0     glue_1.4.2        evaluate_0.14     rmarkdown_2.5    
+## [33] stringi_1.5.3     compiler_4.0.3    scales_1.1.1      desc_1.2.0</code></pre>
 </div>
 <div id="references" class="section level1 unnumbered">
 <h1 class="hasAnchor">
