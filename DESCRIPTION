@@ -12,9 +12,10 @@ Maintainer: Sebastian Gibb <mail@sebastiangibb.de>
 Depends:
     R (>= 3.6.0)
 Suggests:
-    testthat,
+    kableExtra,
     knitr,
-    rmarkdown
+    rmarkdown,
+    testthat
 License: GPL (>= 3)
 LazyData: yes
 Roxygen: list(markdown=TRUE)

@@ -19,7 +19,7 @@ known they could estimated from a given sample.
 
 # Z or Z(log) Transformation
 
-Example data and reference limits are taken from [@hoffmann2017, Table 2].
+Example data and reference limits are taken from @hoffmann2017, Table 2.
 
 ```{r zlog}
 library("zlog")
@@ -39,6 +39,59 @@ reference_limits(albumin)
 reference_limits(albumin, probs = c(0.05, 0.95))
 
 exp(reference_limits(log(albumin)))
+```
+
+# Z(log) Dependent Colour Gradient
+
+@hoffmann2017 suggested a colour gradient to visualise laboratory measurements
+for the user.
+
+```{r zcol, echo = FALSE, out.width = "95%", fig.width = 10, fig.height = 1, fig.align = "center"}
+z <- -10:10
+par(mar = c(0, 0, 0, 0), oma = c(0, 0, 0, 0))
+image(matrix(z, ncol = 1), col = zcol(z), axes = FALSE)
+text(seq(0, 1, length.out=length(z)), 0, label = z)
+```
+
+It could be used to highlight the values in a table:
+
+```{r zcoltable, echo = FALSE, result = "asis"}
+bilirubin <- c(11, 9, 2, 5, 22, 42, 37, 200, 20)
+zloga <- zlog(albumin, limits = c(35, 52))
+zlogb <- zlog(bilirubin, limits = c(2, 21))
+d <- data.frame(
+    Category = c(
+        rep(c(
+            "blood donor",
+            "hepatitis without cirrhosis",
+            "hepatitis with cirrhosis"
+            ),
+            each = 3
+        )
+    ),
+    albumin = albumin,
+    zloga = zloga,
+    bilirubin = bilirubin,
+    zlogb = zlogb
+)
+d$albumin <- cell_spec(d$albumin, background = zcol(zloga), align = "right")
+d$bilirubin <- cell_spec(d$bilirubin, background = zcol(zlogb), align = "right")
+kableExtra::kable_classic(
+    kableExtra::kbl(
+        d,
+        col.names = c(
+            "Category",
+            "albumin", "zlog(albumin)", "bilirubin", "zlog(bilirubin)"
+        ),
+        digits = 2,
+        escape = FALSE,
+        caption = paste0(
+            "Table reproduced from @hoffmann2017, Table 2, limits used: ",
+            "albumin 35-52 g/l, bilirubin 2-21 µmol/l."
+        )
+    ),
+    "basic"
+)
 ```
 
 # Session information
