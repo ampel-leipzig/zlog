@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">zlog</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.4</span>
       </span>
     </div>
 
@@ -307,10 +307,1307 @@ hepatitis with cirrhosis
 </tbody>
 </table>
 </div>
+<div id="pbc-example" class="section level1">
+<h1 class="hasAnchor">
+<a href="#pbc-example" class="anchor"></a><code>PBC</code> Example</h1>
+<p>For demonstration we choose the <code>pbc</code> dataset from the <code>survival</code> package and exclude all non-laboratory measurements except <em>age</em> and <em>sex</em>:</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/therneau/survival">"survival"</a></span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"pbc"</span><span class="op">)</span>
+<span class="va">labs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
+    <span class="st">"bili"</span>, <span class="st">"chol"</span>, <span class="st">"albumin"</span>, <span class="st">"copper"</span>, <span class="st">"alk.phos"</span>, <span class="st">"ast"</span>, <span class="st">"trig"</span>,
+    <span class="st">"platelet"</span>, <span class="st">"protime"</span>
+<span class="op">)</span>
+<span class="va">pbc</span> <span class="op">&lt;-</span> <span class="va">pbc</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"age"</span>, <span class="st">"sex"</span>, <span class="va">labs</span><span class="op">)</span><span class="op">]</span>
+<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">pbc</span><span class="op">)</span>, digits <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
+<table class="table">
+<thead><tr>
+<th style="text-align:right;">
+age
+</th>
+<th style="text-align:left;">
+sex
+</th>
+<th style="text-align:right;">
+bili
+</th>
+<th style="text-align:right;">
+chol
+</th>
+<th style="text-align:right;">
+albumin
+</th>
+<th style="text-align:right;">
+copper
+</th>
+<th style="text-align:right;">
+alk.phos
+</th>
+<th style="text-align:right;">
+ast
+</th>
+<th style="text-align:right;">
+trig
+</th>
+<th style="text-align:right;">
+platelet
+</th>
+<th style="text-align:right;">
+protime
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+58.8
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:right;">
+14.5
+</td>
+<td style="text-align:right;">
+261
+</td>
+<td style="text-align:right;">
+2.6
+</td>
+<td style="text-align:right;">
+156
+</td>
+<td style="text-align:right;">
+1718.0
+</td>
+<td style="text-align:right;">
+137.9
+</td>
+<td style="text-align:right;">
+172
+</td>
+<td style="text-align:right;">
+190
+</td>
+<td style="text-align:right;">
+12.2
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+56.4
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:right;">
+1.1
+</td>
+<td style="text-align:right;">
+302
+</td>
+<td style="text-align:right;">
+4.1
+</td>
+<td style="text-align:right;">
+54
+</td>
+<td style="text-align:right;">
+7394.8
+</td>
+<td style="text-align:right;">
+113.5
+</td>
+<td style="text-align:right;">
+88
+</td>
+<td style="text-align:right;">
+221
+</td>
+<td style="text-align:right;">
+10.6
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+70.1
+</td>
+<td style="text-align:left;">
+m
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+176
+</td>
+<td style="text-align:right;">
+3.5
+</td>
+<td style="text-align:right;">
+210
+</td>
+<td style="text-align:right;">
+516.0
+</td>
+<td style="text-align:right;">
+96.1
+</td>
+<td style="text-align:right;">
+55
+</td>
+<td style="text-align:right;">
+151
+</td>
+<td style="text-align:right;">
+12.0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+54.7
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:right;">
+1.8
+</td>
+<td style="text-align:right;">
+244
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+<td style="text-align:right;">
+64
+</td>
+<td style="text-align:right;">
+6121.8
+</td>
+<td style="text-align:right;">
+60.6
+</td>
+<td style="text-align:right;">
+92
+</td>
+<td style="text-align:right;">
+183
+</td>
+<td style="text-align:right;">
+10.3
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+38.1
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:right;">
+3.4
+</td>
+<td style="text-align:right;">
+279
+</td>
+<td style="text-align:right;">
+3.5
+</td>
+<td style="text-align:right;">
+143
+</td>
+<td style="text-align:right;">
+671.0
+</td>
+<td style="text-align:right;">
+113.2
+</td>
+<td style="text-align:right;">
+72
+</td>
+<td style="text-align:right;">
+136
+</td>
+<td style="text-align:right;">
+10.9
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+66.3
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:right;">
+0.8
+</td>
+<td style="text-align:right;">
+248
+</td>
+<td style="text-align:right;">
+4.0
+</td>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:right;">
+944.0
+</td>
+<td style="text-align:right;">
+93.0
+</td>
+<td style="text-align:right;">
+63
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+11.0
+</td>
+</tr>
+</tbody>
+</table>
+<p>Next we estimate all reference limits from the data:</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">rl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">pbc</span><span class="op">[</span><span class="va">labs</span><span class="op">]</span>, <span class="va">reference_limits</span><span class="op">)</span>
+<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="va">rl</span><span class="op">)</span></code></pre></div>
+<table class="table">
+<thead><tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+bili
+</th>
+<th style="text-align:right;">
+chol
+</th>
+<th style="text-align:right;">
+albumin
+</th>
+<th style="text-align:right;">
+copper
+</th>
+<th style="text-align:right;">
+alk.phos
+</th>
+<th style="text-align:right;">
+ast
+</th>
+<th style="text-align:right;">
+trig
+</th>
+<th style="text-align:right;">
+platelet
+</th>
+<th style="text-align:right;">
+protime
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+lower
+</td>
+<td style="text-align:right;">
+0.400
+</td>
+<td style="text-align:right;">
+174.075
+</td>
+<td style="text-align:right;">
+2.54
+</td>
+<td style="text-align:right;">
+13.00
+</td>
+<td style="text-align:right;">
+504.75
+</td>
+<td style="text-align:right;">
+49.6000
+</td>
+<td style="text-align:right;">
+52.025
+</td>
+<td style="text-align:right;">
+95.0
+</td>
+<td style="text-align:right;">
+9.5000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+upper
+</td>
+<td style="text-align:right;">
+17.315
+</td>
+<td style="text-align:right;">
+1086.225
+</td>
+<td style="text-align:right;">
+4.22
+</td>
+<td style="text-align:right;">
+294.95
+</td>
+<td style="text-align:right;">
+9261.74
+</td>
+<td style="text-align:right;">
+245.2488
+</td>
+<td style="text-align:right;">
+279.800
+</td>
+<td style="text-align:right;">
+470.4
+</td>
+<td style="text-align:right;">
+13.1625
+</td>
+</tr>
+</tbody>
+</table>
+<p>Subsequently we can convert the laboratory measurements into <em>z(log)</em>-values:</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">pbc</span><span class="op">[</span><span class="va">labs</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">labs</span>, <span class="kw">function</span><span class="op">(</span><span class="va">l</span><span class="op">)</span><span class="fu"><a href="../reference/z.html">zlog</a></span><span class="op">(</span><span class="va">pbc</span><span class="op">[</span><span class="va">l</span><span class="op">]</span>, limits <span class="op">=</span> <span class="va">rl</span><span class="op">[</span>, <span class="va">l</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">pbctbl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">pbc</span>, n <span class="op">=</span> <span class="fl">25</span><span class="op">)</span>
+<span class="va">pbctbl</span><span class="op">[</span><span class="va">labs</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">labs</span>, <span class="kw">function</span><span class="op">(</span><span class="va">l</span><span class="op">)</span> <span class="op">{</span>
+    <span class="fu">kableExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/cell_spec.html">cell_spec</a></span><span class="op">(</span>
+        <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span><span class="op">(</span><span class="st">"%.1f"</span>, <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="va">pbctbl</span><span class="op">[</span><span class="va">l</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>,
+        background <span class="op">=</span> <span class="fu"><a href="../reference/zcol.html">zcol</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="va">pbctbl</span><span class="op">[</span><span class="va">l</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>,
+        align <span class="op">=</span> <span class="st">"right"</span>
+    <span class="op">)</span>
+<span class="op">}</span><span class="op">)</span>
+
+<span class="fu">kableExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_classic.html">kable_classic</a></span><span class="op">(</span>
+    <span class="fu">kableExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kbl.html">kbl</a></span><span class="op">(</span><span class="va">pbctbl</span>, digits <span class="op">=</span> <span class="fl">1</span>, escape <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>,
+    <span class="st">"basic"</span>
+<span class="op">)</span></code></pre></div>
+<table class="table  lightable-classic">
+<thead><tr>
+<th style="text-align:right;">
+age
+</th>
+<th style="text-align:left;">
+sex
+</th>
+<th style="text-align:left;">
+bili
+</th>
+<th style="text-align:left;">
+chol
+</th>
+<th style="text-align:left;">
+albumin
+</th>
+<th style="text-align:left;">
+copper
+</th>
+<th style="text-align:left;">
+alk.phos
+</th>
+<th style="text-align:left;">
+ast
+</th>
+<th style="text-align:left;">
+trig
+</th>
+<th style="text-align:left;">
+platelet
+</th>
+<th style="text-align:left;">
+protime
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+58.8
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEF9F5 !important;text-align: right;">1.8</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FBFCFD !important;text-align: right;">-1.1</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #F7F9FC !important;text-align: right;">-1.8</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFCF9 !important;text-align: right;">1.2</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FDFDFE !important;text-align: right;">-0.3</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFDFC !important;text-align: right;">0.5</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFCFB !important;text-align: right;">0.8</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FDFDFE !important;text-align: right;">-0.3</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFCFA !important;text-align: right;">1.0</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+56.4
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FBFCFD !important;text-align: right;">-0.9</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FCFDFD !important;text-align: right;">-0.8</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEF9F4 !important;text-align: right;">1.8</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FDFDFE !important;text-align: right;">-0.2</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFAF6 !important;text-align: right;">1.7</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFEFD !important;text-align: right;">0.1</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FCFDFE !important;text-align: right;">-0.7</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFDFD !important;text-align: right;">0.1</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FCFDFE !important;text-align: right;">-0.6</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+70.1
+</td>
+<td style="text-align:left;">
+m
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FCFDFE !important;text-align: right;">-0.7</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #F6F8FB !important;text-align: right;">-1.9</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFDFC !important;text-align: right;">0.5</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFAF7 !important;text-align: right;">1.5</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #F6F9FB !important;text-align: right;">-1.9</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FDFDFE !important;text-align: right;">-0.3</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #F7F9FC !important;text-align: right;">-1.8</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FCFCFD !important;text-align: right;">-0.8</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFCFB !important;text-align: right;">0.8</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+54.7
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FDFDFE !important;text-align: right;">-0.4</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FAFBFD !important;text-align: right;">-1.2</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #F6F8FB !important;text-align: right;">-2.0</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFEFD !important;text-align: right;">0.0</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFBF8 !important;text-align: right;">1.4</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #F9FBFD !important;text-align: right;">-1.5</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FCFDFE !important;text-align: right;">-0.6</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FDFDFE !important;text-align: right;">-0.4</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FBFCFD !important;text-align: right;">-1.0</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+38.1
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFDFC !important;text-align: right;">0.3</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FBFCFD !important;text-align: right;">-1.0</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFDFB !important;text-align: right;">0.6</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFCFA !important;text-align: right;">1.1</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #F9FAFC !important;text-align: right;">-1.6</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFEFD !important;text-align: right;">0.1</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FAFCFD !important;text-align: right;">-1.2</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FBFCFD !important;text-align: right;">-1.1</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FDFDFE !important;text-align: right;">-0.3</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+66.3
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FAFBFD !important;text-align: right;">-1.2</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FAFCFD !important;text-align: right;">-1.2</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFBF7 !important;text-align: right;">1.5</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FDFDFE !important;text-align: right;">-0.3</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FBFCFD !important;text-align: right;">-1.1</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FDFDFE !important;text-align: right;">-0.4</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #F9FAFC !important;text-align: right;">-1.5</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFEFD !important;text-align: right;">NA</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FDFDFE !important;text-align: right;">-0.2</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+55.5
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FBFCFD !important;text-align: right;">-1.0</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FCFDFE !important;text-align: right;">-0.6</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFAF5 !important;text-align: right;">1.7</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FDFDFE !important;text-align: right;">-0.2</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FAFBFD !important;text-align: right;">-1.3</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #F9FBFC !important;text-align: right;">-1.5</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFBF8 !important;text-align: right;">1.3</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FDFEFE !important;text-align: right;">-0.1</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #F8FAFC !important;text-align: right;">-1.7</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+53.1
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #F3F6FA !important;text-align: right;">-2.3</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FBFCFD !important;text-align: right;">-0.9</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFAF7 !important;text-align: right;">1.5</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FDFDFE !important;text-align: right;">-0.2</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFCFA !important;text-align: right;">1.0</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #E1E9F3 !important;text-align: right;">-3.3</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFCFA !important;text-align: right;">1.0</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFBF8 !important;text-align: right;">1.4</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FDFDFE !important;text-align: right;">-0.2</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+42.5
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFDFC !important;text-align: right;">0.2</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFDFC !important;text-align: right;">0.5</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FDFDFE !important;text-align: right;">-0.5</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFDFC !important;text-align: right;">0.3</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFEFD !important;text-align: right;">0.1</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFDFB !important;text-align: right;">0.7</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FCFDFE !important;text-align: right;">-0.7</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFDFC !important;text-align: right;">0.4</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FDFDFE !important;text-align: right;">-0.2</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+70.6
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFAF6 !important;text-align: right;">1.6</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #F8FAFC !important;text-align: right;">-1.7</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FAFBFD !important;text-align: right;">-1.4</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFCFA !important;text-align: right;">1.0</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FBFCFD !important;text-align: right;">-1.2</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFDFB !important;text-align: right;">0.7</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFDFC !important;text-align: right;">0.4</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFCFA !important;text-align: right;">0.9</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFDFC !important;text-align: right;">0.3</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+53.7
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FCFDFE !important;text-align: right;">-0.7</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FBFCFD !important;text-align: right;">-1.1</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEF9F4 !important;text-align: right;">1.8</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FDFDFE !important;text-align: right;">-0.4</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FBFCFD !important;text-align: right;">-0.9</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FCFCFD !important;text-align: right;">-0.8</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FBFCFD !important;text-align: right;">-1.0</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFDFC !important;text-align: right;">0.5</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFCFB !important;text-align: right;">0.8</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+59.1
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFDFC !important;text-align: right;">0.3</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FAFBFD !important;text-align: right;">-1.3</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFDFC !important;text-align: right;">0.6</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFDFC !important;text-align: right;">0.5</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #F8F9FC !important;text-align: right;">-1.7</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FCFDFE !important;text-align: right;">-0.7</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FCFDFE !important;text-align: right;">-0.6</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #EEF2F8 !important;text-align: right;">-2.7</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEF6EE !important;text-align: right;">2.4</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+45.7
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FAFBFD !important;text-align: right;">-1.4</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FBFCFD !important;text-align: right;">-0.9</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFBF9 !important;text-align: right;">1.3</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FCFDFE !important;text-align: right;">-0.5</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FCFCFD !important;text-align: right;">-0.8</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FCFDFE !important;text-align: right;">-0.5</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFDFC !important;text-align: right;">0.2</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFDFC !important;text-align: right;">0.4</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FCFDFE !important;text-align: right;">-0.6</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+56.2
+</td>
+<td style="text-align:left;">
+m
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FAFBFD !important;text-align: right;">-1.2</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFEFD !important;text-align: right;">NA</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #ECF1F7 !important;text-align: right;">-2.8</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FDFDFE !important;text-align: right;">-0.5</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #F9FBFD !important;text-align: right;">-1.5</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FBFCFD !important;text-align: right;">-1.1</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFEFD !important;text-align: right;">NA</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FCFDFE !important;text-align: right;">-0.7</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FDFDFE !important;text-align: right;">-0.2</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+64.6
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FAFBFD !important;text-align: right;">-1.2</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FAFBFD !important;text-align: right;">-1.4</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFBF8 !important;text-align: right;">1.3</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFBF8 !important;text-align: right;">1.3</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEF9F3 !important;text-align: right;">1.9</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFDFC !important;text-align: right;">0.4</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FCFDFE !important;text-align: right;">-0.5</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFCFB !important;text-align: right;">0.8</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FDFDFE !important;text-align: right;">-0.2</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+40.4
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FAFBFD !important;text-align: right;">-1.4</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #F8FAFC !important;text-align: right;">-1.6</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFCFB !important;text-align: right;">0.9</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FBFCFD !important;text-align: right;">-1.0</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #F9FAFC !important;text-align: right;">-1.5</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FBFCFD !important;text-align: right;">-1.0</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #F8FAFC !important;text-align: right;">-1.7</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FDFDFE !important;text-align: right;">-0.2</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FDFDFE !important;text-align: right;">-0.4</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+52.2
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFEFD !important;text-align: right;">0.0</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FBFCFD !important;text-align: right;">-1.0</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FDFDFE !important;text-align: right;">-0.3</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFCF9 !important;text-align: right;">1.2</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FDFDFE !important;text-align: right;">-0.5</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFDFC !important;text-align: right;">0.2</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFDFD !important;text-align: right;">0.1</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFDFD !important;text-align: right;">0.1</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FCFDFE !important;text-align: right;">-0.8</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+53.9
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFAF7 !important;text-align: right;">1.5</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #F6F9FB !important;text-align: right;">-1.9</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FAFCFD !important;text-align: right;">-1.2</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FDF1E4 !important;text-align: right;">2.8</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FBFCFD !important;text-align: right;">-1.1</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEF6EF !important;text-align: right;">2.3</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFCF9 !important;text-align: right;">1.2</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFDFB !important;text-align: right;">0.7</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFBF9 !important;text-align: right;">1.2</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+49.6
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FAFBFD !important;text-align: right;">-1.4</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FAFBFD !important;text-align: right;">-1.3</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFDFB !important;text-align: right;">0.6</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FCFDFE !important;text-align: right;">-0.6</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FDFDFE !important;text-align: right;">-0.2</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FDFDFE !important;text-align: right;">-0.4</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFEFD !important;text-align: right;">0.0</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FDFEFE !important;text-align: right;">-0.0</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FDFDFE !important;text-align: right;">-0.2</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+60.0
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFDFB !important;text-align: right;">0.7</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FDFDFE !important;text-align: right;">-0.3</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFDFC !important;text-align: right;">0.5</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFCFA !important;text-align: right;">1.0</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FDFDFE !important;text-align: right;">-0.2</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFDFC !important;text-align: right;">0.3</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFDFC !important;text-align: right;">0.3</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFCFA !important;text-align: right;">1.0</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEF9F4 !important;text-align: right;">1.8</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+64.2
+</td>
+<td style="text-align:left;">
+m
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #F9FAFC !important;text-align: right;">-1.5</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FBFCFD !important;text-align: right;">-1.2</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFCF9 !important;text-align: right;">1.2</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FCFDFE !important;text-align: right;">-0.5</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FAFBFD !important;text-align: right;">-1.3</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FAFBFD !important;text-align: right;">-1.3</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FCFCFD !important;text-align: right;">-0.9</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFCF9 !important;text-align: right;">1.1</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFDFC !important;text-align: right;">0.2</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+56.3
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFDFC !important;text-align: right;">0.3</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FBFCFD !important;text-align: right;">-1.0</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFDFB !important;text-align: right;">0.8</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEF4EB !important;text-align: right;">2.5</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FCFDFE !important;text-align: right;">-0.6</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFDFC !important;text-align: right;">0.2</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #F7F9FC !important;text-align: right;">-1.8</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FCFDFE !important;text-align: right;">-0.5</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFDFC !important;text-align: right;">0.4</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+56.0
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEF8F3 !important;text-align: right;">2.0</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FDFDFE !important;text-align: right;">-0.2</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FCFCFD !important;text-align: right;">-0.8</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEF2E6 !important;text-align: right;">2.8</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFBF8 !important;text-align: right;">1.4</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEF9F5 !important;text-align: right;">1.8</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFCFA !important;text-align: right;">1.1</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFEFD !important;text-align: right;">0.0</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFDFC !important;text-align: right;">0.5</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+44.5
+</td>
+<td style="text-align:left;">
+m
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FDFDFE !important;text-align: right;">-0.2</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFEFD !important;text-align: right;">0.1</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFAF7 !important;text-align: right;">1.5</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFCFA !important;text-align: right;">0.9</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFBF8 !important;text-align: right;">1.3</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFAF5 !important;text-align: right;">1.7</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFBF7 !important;text-align: right;">1.5</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #EEF2F8 !important;text-align: right;">-2.7</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #F9FBFD !important;text-align: right;">-1.5</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+45.1
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FAFBFD !important;text-align: right;">-1.4</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FCFCFD !important;text-align: right;">-0.8</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFAF5 !important;text-align: right;">1.7</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FCFDFE !important;text-align: right;">-0.5</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #F9FAFC !important;text-align: right;">-1.6</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FDFEFE !important;text-align: right;">-0.1</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FAFBFD !important;text-align: right;">-1.4</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFCFA !important;text-align: right;">1.0</span>
+</td>
+<td style="text-align:left;">
+<span style="     border-radius: 4px; padding-right: 4px; padding-left: 4px; background-color: #FEFDFD !important;text-align: right;">0.1</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
 <div id="session-information" class="section level1">
 <h1 class="hasAnchor">
 <a href="#session-information" class="anchor"></a>Session information</h1>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code>## R version 4.0.3 (2020-10-10)
 ## Platform: x86_64-apple-darwin17.0 (64-bit)
@@ -327,18 +1624,20 @@ hepatitis with cirrhosis
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] zlog_0.0.3
+## [1] survival_3.2-7 zlog_0.0.4    
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] rstudioapi_0.13   knitr_1.30        xml2_1.3.2        magrittr_2.0.1   
-##  [5] munsell_0.5.0     rvest_0.3.6       viridisLite_0.3.0 colorspace_2.0-0 
-##  [9] R6_2.5.0          ragg_0.4.0        rlang_0.4.8       stringr_1.4.0    
-## [13] httr_1.4.2        tools_4.0.3       webshot_0.5.2     xfun_0.19        
-## [17] htmltools_0.5.0   systemfonts_0.3.2 yaml_2.2.1        assertthat_0.2.1 
-## [21] rprojroot_2.0.2   digest_0.6.27     lifecycle_0.2.0   pkgdown_1.6.1    
-## [25] crayon_1.3.4      textshaping_0.2.1 kableExtra_1.3.1  fs_1.5.0         
-## [29] memoise_1.1.0     glue_1.4.2        evaluate_0.14     rmarkdown_2.5    
-## [33] stringi_1.5.3     compiler_4.0.3    scales_1.1.1      desc_1.2.0</code></pre>
+##  [5] splines_4.0.3     munsell_0.5.0     rvest_0.3.6       lattice_0.20-41  
+##  [9] viridisLite_0.3.0 colorspace_2.0-0  R6_2.5.0          ragg_0.4.0       
+## [13] rlang_0.4.8       highr_0.8         stringr_1.4.0     httr_1.4.2       
+## [17] tools_4.0.3       grid_4.0.3        webshot_0.5.2     xfun_0.19        
+## [21] htmltools_0.5.0   systemfonts_0.3.2 yaml_2.2.1        assertthat_0.2.1 
+## [25] rprojroot_2.0.2   digest_0.6.27     lifecycle_0.2.0   pkgdown_1.6.1    
+## [29] crayon_1.3.4      textshaping_0.2.1 Matrix_1.2-18     kableExtra_1.3.1 
+## [33] fs_1.5.0          memoise_1.1.0     glue_1.4.2        evaluate_0.14    
+## [37] rmarkdown_2.5     stringi_1.5.3     compiler_4.0.3    scales_1.1.1     
+## [41] desc_1.2.0</code></pre>
 </div>
 <div id="references" class="section level1 unnumbered">
 <h1 class="hasAnchor">
