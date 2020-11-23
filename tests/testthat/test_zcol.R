@@ -1,6 +1,7 @@
 test_that("zcol", {
     expect_error(zcol("foo"))
     expect_identical(zcol(c(0, 10)), c("#FEFEFD", "#F57801"))
+    expect_identical(zcol(NA), c("#FEFEFD"))
 })
 
 test_that(".zlogF", {

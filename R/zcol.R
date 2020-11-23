@@ -21,6 +21,8 @@
 #' image(matrix(z, ncol = 1), col = zcol(z), xaxt = "n", yaxt = "n")
 #' text(seq(0, 1, length.out=length(z)), 0, label = z)
 zcol <- function(x) {
+    x[is.na(x)] <- 0
+
     ## the colour values are picked from the PDF version of Hoffmann et al. 2017
     ## and may be incorrect cause of jpeg artefacts
     rgb(
