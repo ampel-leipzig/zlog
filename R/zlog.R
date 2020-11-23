@@ -1,4 +1,4 @@
-#' Calculate z/zlog values
+#' Calculate z/zlog Values
 #'
 #' Calculates the z or z(log) values for laboratory measurement standardisation
 #' as proposed in Hoffmann 2017 et al.

@@ -3,7 +3,7 @@
 \name{iz}
 \alias{iz}
 \alias{izlog}
-\title{Calculate laboratory measurements from z/zlog values}
+\title{Calculate Laboratory Measurements from z/zlog Values}
 \usage{
 iz(x, limits, probs = c(0.025, 0.975))
 

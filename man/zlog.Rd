@@ -3,7 +3,7 @@
 \name{z}
 \alias{z}
 \alias{zlog}
-\title{Calculate z/zlog values}
+\title{Calculate z/zlog Values}
 \usage{
 z(x, limits, probs = c(0.025, 0.975))
 

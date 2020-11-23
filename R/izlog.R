@@ -1,4 +1,4 @@
-#' Calculate laboratory measurements from z/zlog values
+#' Calculate Laboratory Measurements from z/zlog Values
 #'
 #' Inverse function to z or z(log) for laboratory measurement standardisation
 #' as proposed in Hoffmann 2017 et al.

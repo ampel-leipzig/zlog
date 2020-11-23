@@ -33,7 +33,7 @@ zcol <- function(x) {
     )
 }
 
-#' Map zlog value to 0:255
+#' Map zlog Value to 0:255
 #'
 #' Similar to the `F` described in Hoffmann et al. 2017.
 #'
