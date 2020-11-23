@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">zlog</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.3</span>
       </span>
     </div>
 
@@ -99,19 +99,26 @@
 <pre><code>## [1] -0.15472223 -2.24698167 -1.14569028  0.07826303  1.57162335 -0.15472223
 ## [7] -4.52949253 -3.16160843 -5.69571148</code></pre>
 </div>
+<div id="inverse-z-or-zlog-transformationundo-transformation" class="section level1">
+<h1 class="hasAnchor">
+<a href="#inverse-z-or-zlog-transformationundo-transformation" class="anchor"></a>Inverse Z or Z(log) Transformation/Undo Transformation</h1>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/iz.html">izlog</a></span><span class="op">(</span><span class="fu"><a href="../reference/z.html">zlog</a></span><span class="op">(</span><span class="va">albumin</span>, limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">35</span>, <span class="fl">52</span><span class="op">)</span><span class="op">)</span>, limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">35</span>, <span class="fl">52</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] 42 34 38 43 50 42 27 31 24</code></pre>
+</div>
 <div id="estimate-reference-limits" class="section level1">
 <h1 class="hasAnchor">
 <a href="#estimate-reference-limits" class="anchor"></a>Estimate Reference Limits</h1>
 <p>The <code>reference_limits</code> functions calculates the lower and upper 2.5 or 97.5 (or a user given probability) quantiles:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/reference_limits.html">reference_limits</a></span><span class="op">(</span><span class="va">albumin</span><span class="op">)</span></code></pre></div>
 <pre><code>## lower upper 
 ##  24.6  48.6</code></pre>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/reference_limits.html">reference_limits</a></span><span class="op">(</span><span class="va">albumin</span>, probs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.05</span>, <span class="fl">0.95</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## lower upper 
 ##  25.2  47.2</code></pre>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="fu"><a href="../reference/reference_limits.html">reference_limits</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">albumin</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>##    lower    upper 
 ## 24.57207 48.51429</code></pre>
@@ -303,7 +310,7 @@ hepatitis with cirrhosis
 <div id="session-information" class="section level1">
 <h1 class="hasAnchor">
 <a href="#session-information" class="anchor"></a>Session information</h1>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code>## R version 4.0.3 (2020-10-10)
 ## Platform: x86_64-apple-darwin17.0 (64-bit)
@@ -320,7 +327,7 @@ hepatitis with cirrhosis
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] zlog_0.0.2
+## [1] zlog_0.0.3
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] rstudioapi_0.13   knitr_1.30        xml2_1.3.2        magrittr_2.0.1   
