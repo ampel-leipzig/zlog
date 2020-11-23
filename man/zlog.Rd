@@ -57,6 +57,9 @@ Hoffmann, Georg, Frank Klawonn, Ralf Lichtinghagen, and Matthias Orth.
 "The Zlog-Value as Basis for the Standardization of Laboratory Results."
 LaboratoriumsMedizin 41 (1): 23–32. \doi{10.1515/labmed-2016-0087}.
 }
+\seealso{
+\code{\link[=izlog]{izlog()}}
+}
 \author{
 Sebastian Gibb
 }

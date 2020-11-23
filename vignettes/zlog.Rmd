@@ -29,6 +29,12 @@ z(albumin, limits = c(35, 52))
 zlog(albumin, limits = c(35, 52))
 ```
 
+# Inverse Z or Z(log) Transformation/Undo Transformation
+
+```{r izlog}
+izlog(zlog(albumin, limits = c(35, 52)), limits = c(35, 52))
+```
+
 # Estimate Reference Limits
 
 The `reference_limits` functions calculates the lower and upper 2.5 or 97.5
