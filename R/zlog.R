@@ -51,8 +51,7 @@ z <- function(x, limits, probs = c(0.025, 0.975)) {
 #' albumin <- c(42, 34, 38, 43, 50, 42, 27, 31, 24)
 #' zlog(albumin, limits = c(35, 52))
 zlog <- function(x, limits, probs = c(0.025, 0.975)) {
-    if (!is.numeric(limits) || length(limits) != 2L)
-        stop("'limits' has to be a numeric of length 2.")
-
-    z(log(x), limits = log(limits), probs = probs)
+    if (missing(limits))
+        stop("argument \"limits\" is missing, with no default")
+    z(log(x), log(limits), probs)
 }
