@@ -104,6 +104,50 @@ kableExtra::kable_classic(
 )
 ```
 
+# `PBC` Example
+
+For demonstration we choose the `pbc` dataset from the `survival` package
+and exclude all non-laboratory measurements except *age* and *sex*:
+
+```{r pbc_load}
+library("survival")
+data("pbc")
+labs <- c(
+    "bili", "chol", "albumin", "copper", "alk.phos", "ast", "trig",
+    "platelet", "protime"
+)
+pbc <- pbc[, c("age", "sex", labs)]
+knitr::kable(head(pbc), digits = 1)
+```
+
+Next we estimate all reference limits from the data:
+
+```{r pbc_reference_limits}
+rl <- sapply(pbc[labs], reference_limits)
+knitr::kable(rl)
+```
+
+Subsequently we can convert the laboratory measurements into *z(log)*-values:
+
+```{r pbc_zlog}
+pbc[labs] <- lapply(labs, function(l)zlog(pbc[l], limits = rl[, l]))
+```
+```{r pbc_table}
+pbctbl <- head(pbc, n = 25)
+pbctbl[labs] <- lapply(labs, function(l) {
+    kableExtra::cell_spec(
+        sprintf("%.1f", unlist(pbctbl[l])),
+        background = zcol(unlist(pbctbl[l])),
+        align = "right"
+    )
+})
+
+kableExtra::kable_classic(
+    kableExtra::kbl(pbctbl, digits = 1, escape = FALSE),
+    "basic"
+)
+```
+
 # Session information
 
 ```{r si}
