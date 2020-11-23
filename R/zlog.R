@@ -4,9 +4,12 @@
 #' as proposed in Hoffmann 2017 et al.
 #'
 #' @param x `numeric`, laboratory values
-#' @param limits `numeric`, lower and upper reference limits.
+#' @param limits `numeric` or `matrix`, lower and upper reference limits. Has to
+#' be of length 2 for `numeric` or a two-column `matrix` with as many rows as
+#' elements in `x`.
 #' @param probs `numeric`, probabilities of the lower and upper reference limit,
-#' default: `c(0.025, 0.975)` (spanning 95 %).
+#' default: `c(0.025, 0.975)` (spanning 95 %). Has to be of length 2 for
+#' `numeric` or a two-column `matrix` with as many rows as elements in `x`.
 #'
 #' @details
 #' The z value is calculated as follows (assuming that the limits where 0.025
@@ -32,14 +35,28 @@
 #' z(1:10, limits = c(2, 8))
 #'
 z <- function(x, limits, probs = c(0.025, 0.975)) {
-    if (!is.numeric(limits) || length(limits) != 2L)
-        stop("'limits' has to be a numeric of length 2.")
+    if (!(is.numeric(limits) && length(limits) == 2L) &&
+        !(is.matrix(limits) && mode(limits) == "numeric" &&
+          nrow(limits) == length(x) && ncol(limits) == 2L))
+        stop("'limits' has to be a numeric of length 2, or a ",
+             "matrix with 2 columns (lower and upper limit) where ",
+             "the number of rows equals the length of 'x'.")
 
-    if (!is.numeric(probs) || length(probs) != 2L)
-        stop("'probs' has to be a numeric of length 2.")
+    if (!is.matrix(limits))
+        limits <- t(limits)
 
-    m <- (limits[1L] + limits[2L]) / 2L
-    s <- abs(limits[2L] - limits[1L]) / sum(abs(qnorm(range(probs))))
+    if (!(is.numeric(probs) && length(probs) == 2L) &&
+        !(is.matrix(probs) && mode(probs) == "numeric" &&
+          nrow(probs) == length(x) && ncol(probs) == 2L))
+        stop("'probs' has to be a numeric of length 2, or a ",
+             "matrix with 2 columns (lower and upper limit) where ",
+             "the number of rows equals the length of 'x'.")
+
+    if (!is.matrix(probs))
+        probs <- t(probs)
+
+    m <- (limits[, 1L] + limits[, 2L]) / 2L
+    s <- abs(limits[, 2L] - limits[, 1L]) / rowSums(abs(qnorm(probs)))
 
     (x - m) / s
 }
@@ -50,6 +67,14 @@ z <- function(x, limits, probs = c(0.025, 0.975)) {
 #' # from Hoffmann et al. 2017
 #' albumin <- c(42, 34, 38, 43, 50, 42, 27, 31, 24)
 #' zlog(albumin, limits = c(35, 52))
+#'
+#' bilirubin <- c(11, 9, 2, 5, 22, 42, 37, 200, 20)
+#'
+#' limits <- cbind(
+#'     lower = rep(c(35, 2), c(length(albumin), length(bilirubin))),
+#'     upper = rep(c(52, 21), c(length(albumin), length(bilirubin)))
+#' )
+#' zlog(c(albumin, bilirubin), limits = limits)
 zlog <- function(x, limits, probs = c(0.025, 0.975)) {
     if (missing(limits))
         stop("argument \"limits\" is missing, with no default")

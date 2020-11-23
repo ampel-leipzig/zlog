@@ -12,10 +12,13 @@ zlog(x, limits, probs = c(0.025, 0.975))
 \arguments{
 \item{x}{\code{numeric}, laboratory values}
 
-\item{limits}{\code{numeric}, lower and upper reference limits.}
+\item{limits}{\code{numeric} or \code{matrix}, lower and upper reference limits. Has to
+be of length 2 for \code{numeric} or a two-column \code{matrix} with as many rows as
+elements in \code{x}.}
 
 \item{probs}{\code{numeric}, probabilities of the lower and upper reference limit,
-default: \code{c(0.025, 0.975)} (spanning 95 \%).}
+default: \code{c(0.025, 0.975)} (spanning 95 \%). Has to be of length 2 for
+\code{numeric} or a two-column \code{matrix} with as many rows as elements in \code{x}.}
 }
 \value{
 \code{numeric}, z or z(log) values.
@@ -39,6 +42,14 @@ z(1:10, limits = c(2, 8))
 # from Hoffmann et al. 2017
 albumin <- c(42, 34, 38, 43, 50, 42, 27, 31, 24)
 zlog(albumin, limits = c(35, 52))
+
+bilirubin <- c(11, 9, 2, 5, 22, 42, 37, 200, 20)
+
+limits <- cbind(
+    lower = rep(c(35, 2), c(length(albumin), length(bilirubin))),
+    upper = rep(c(52, 21), c(length(albumin), length(bilirubin)))
+)
+zlog(c(albumin, bilirubin), limits = limits)
 }
 \references{
 Hoffmann, Georg, Frank Klawonn, Ralf Lichtinghagen, and Matthias Orth.
