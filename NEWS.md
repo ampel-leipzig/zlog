@@ -1,5 +1,9 @@
 # zlog 0.0
 
+## Changes in 0.0.5
+
+- Add `lookup_limits` to find reference limits in reference tables.
+
 ## Changes in 0.0.4
 
 - Fix `zcol` for `NA`.
