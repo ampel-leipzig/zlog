@@ -44,9 +44,9 @@ zcol <- function(x) {
 #' @noRd
 .zlogF <- function(x, d) {
     # the proposed function in Hoffmann et al. 2017 doesn't increase enough,
-    # so we add 5 here
+    # so we add 4 here
     # the color range is white:color for 0:10, 0:1 should be white, 2 should
-    # have a clear visible color, d / 1 + exp(abs(x) - 5) is in the range from
-    # 1.7:254 for x = 0:10 and d = 255
-    d / (1 + exp(5 - abs(x)))
+    # have a clear visible color, d / 1 + exp(4 - abs(x)) is in the range from
+    # 4.6:254.4 for x = 0:10 and d = 255
+    d / (1 + exp(4 - abs(x)))
 }

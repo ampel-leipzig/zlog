@@ -1,5 +1,10 @@
 # zlog 0.0
 
+## Changes in 0.0.6
+
+- `zcol`: slightly increase color contrast around 1 and 2
+  (move darker colours one unit into the middle).
+
 ## Changes in 0.0.5
 
 - Add `lookup_limits` to find reference limits in reference tables.
