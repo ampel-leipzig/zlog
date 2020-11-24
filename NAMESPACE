@@ -2,6 +2,7 @@
 
 export(iz)
 export(izlog)
+export(lookup_limits)
 export(reference_limits)
 export(z)
 export(zcol)
