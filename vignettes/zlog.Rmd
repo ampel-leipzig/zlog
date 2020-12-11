@@ -151,19 +151,48 @@ pbc <- pbc[, c("age", "sex", labs)]
 knitr::kable(head(pbc), digits = 1)
 ```
 
-Next we estimate all reference limits from the data:
+Next we estimate all reference limits from the data. We want to use sex-specific
+values for copper and aspartate aminotransferase (`"ast"`).
 
 ```{r pbc_reference_limits}
-rl <- sapply(pbc[labs], reference_limits)
-knitr::kable(rl)
+## replicate copper and ast 2 times, use the others just once
+param <- rep(labs, ifelse(labs %in% c("copper", "ast"), 2, 1))
+sex <- rep_len("both", length(param))
+
+## replace sex == both with female and male for copper and ast
+sex[param %in% c("copper", "ast")] <- c("f", "m")
+
+## create data.frame, we ignore age-specific values for now and set age to zero
+## (means applicable for all ages)
+reference <- data.frame(
+    param = param, age = 0, sex = sex, lower = NA, upper = NA
+)
+
+## estimate reference limits from sample data
+for (i in seq_len(nrow(reference))) {
+    reference[i, c("lower", "upper")] <-
+        if (reference$sex[i] == "both")
+            reference_limits(pbc[reference$param[i]])
+        else
+            reference_limits(pbc[pbc$sex == reference$sex[i], reference$param[i]])
+}
+knitr::kable(reference)
 ```
 
 Subsequently we can convert the laboratory measurements into *z(log)*-values:
 
 ```{r pbc_zlog}
-pbc[labs] <- lapply(labs, function(l)zlog(pbc[l], limits = rl[, l]))
+## loop through all laboratory values and lookup their reference limits
+pbc[labs] <- lapply(labs, function(l) {
+    rl <- lookup_limits(
+        age = pbc$age,
+        sex = pbc$sex,
+        table = reference[reference$param == l,]
+    )
+    zlog(pbc[, l], limits = rl)
+})
 ```
-```{r pbc_table}
+```{r pbc_table, echo = FALSE}
 pbctbl <- head(pbc, n = 25)
 pbctbl[labs] <- lapply(labs, function(l) {
     kableExtra::cell_spec(

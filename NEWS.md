@@ -1,5 +1,10 @@
 # zlog 0.0
 
+## Changes in 0.0.7
+
+- Extend `pbc` vignette example with a sex-specific reference table and use
+  `lookup_limits`.
+
 ## Changes in 0.0.6
 
 - `zcol`: slightly increase color contrast around 1 and 2
