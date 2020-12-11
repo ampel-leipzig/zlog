@@ -127,7 +127,7 @@ lookup_limits(
     table = reference[reference$param == "albumin",]
 )
 
-# lookup bilirubin referenc values for infants
+# lookup bilirubin reference values for infants
 lookup_limits(
     age = 0:8,
     sex = rep(c("female", "male"), 5:4),
