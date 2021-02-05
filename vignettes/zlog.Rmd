@@ -13,11 +13,22 @@ bibliography: bibliography.bib
 # Introduction
 
 The `zlog` package offers functions to transform laboratory measurements into
-standardised *z* or *z(log)*-values as suggested in @hoffmann2017.
+standardised $z$ or $z(log)$-values as suggested in @hoffmann2017.
 Therefore the lower and upper reference limits are needed. If these are not
 known they could estimated from a given sample.
 
 # Z or Z(log) Transformation
+
+@hoffmann2017 define $z$ as follows:
+
+$$z = (x - (limits_1 + limits_2 )/2) * 3.92/(limits_2 - limits_1)$$
+
+Consequently the $z(log)$ is defined as:
+
+$$zlog = (\log(x) - (\log(limits_1) + \log(limits_2))/2) * 3.92/(\log(limits_2) - \log(limits_1))$$
+
+Where $x$ is the measured laboratory value and $limits_1$ and $limits_2$ are
+the lower and upper reference limit, respectively.
 
 Example data and reference limits are taken from @hoffmann2017, Table 2.
 
