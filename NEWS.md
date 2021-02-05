@@ -1,5 +1,9 @@
 # zlog 0.0
 
+## Changes in 0.0.8
+
+- Add *z* and *z(log)* equation to vignette.
+
 ## Changes in 0.0.7
 
 - Extend `pbc` vignette example with a sex-specific reference table and use
