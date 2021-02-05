@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">zlog</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.8</span>
       </span>
     </div>
 
@@ -39,7 +39,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -63,8 +63,7 @@
 
       
 
-      </header><script src="zlog_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="zlog_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
-<script src="zlog_files/anchor-sections-1.0/anchor-sections.js"></script><script src="zlog_files/kePrint-0.0.1/kePrint.js"></script><link href="zlog_files/lightable-0.0.1/lightable.css" rel="stylesheet">
+      </header><script src="zlog_files/accessible-code-block-0.0.1/empty-anchor.js"></script><script src="zlog_files/kePrint-0.0.1/kePrint.js"></script><link href="zlog_files/lightable-0.0.1/lightable.css" rel="stylesheet">
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
@@ -81,11 +80,16 @@
 <div id="introduction" class="section level1">
 <h1 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h1>
-<p>The <code>zlog</code> package offers functions to transform laboratory measurements into standardised <em>z</em> or <em>z(log)</em>-values as suggested in <span class="citation">Hoffmann et al. (2017)</span>. Therefore the lower and upper reference limits are needed. If these are not known they could estimated from a given sample.</p>
+<p>The <code>zlog</code> package offers functions to transform laboratory measurements into standardised <span class="math inline">\(z\)</span> or <span class="math inline">\(z(log)\)</span>-values as suggested in <span class="citation">Hoffmann et al. (2017)</span>. Therefore the lower and upper reference limits are needed. If these are not known they could estimated from a given sample.</p>
 </div>
 <div id="z-or-zlog-transformation" class="section level1">
 <h1 class="hasAnchor">
 <a href="#z-or-zlog-transformation" class="anchor"></a>Z or Z(log) Transformation</h1>
+<p><span class="citation">Hoffmann et al. (2017)</span> define <span class="math inline">\(z\)</span> as follows:</p>
+<p><span class="math display">\[z = (x - (limits_1 + limits_2 )/2) * 3.92/(limits_2 - limits_1)\]</span></p>
+<p>Consequently the <span class="math inline">\(z(log)\)</span> is defined as:</p>
+<p><span class="math display">\[zlog = (\log(x) - (\log(limits_1) + \log(limits_2))/2) * 3.92/(\log(limits_2) - \log(limits_1))\]</span></p>
+<p>Where <span class="math inline">\(x\)</span> is the measured laboratory value and <span class="math inline">\(limits_1\)</span> and <span class="math inline">\(limits_2\)</span> are the lower and upper reference limit, respectively.</p>
 <p>Example data and reference limits are taken from <span class="citation">Hoffmann et al. (2017)</span>, Table 2.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st">"zlog"</span><span class="op">)</span>
@@ -1894,20 +1898,20 @@ f
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] survival_3.2-7 zlog_0.0.7    
+## [1] survival_3.2-7 zlog_0.0.8    
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] rstudioapi_0.13   knitr_1.30        xml2_1.3.2        magrittr_2.0.1   
-##  [5] splines_4.0.3     munsell_0.5.0     rvest_0.3.6       lattice_0.20-41  
-##  [9] viridisLite_0.3.0 colorspace_2.0-0  R6_2.5.0          ragg_0.4.0       
-## [13] rlang_0.4.9       highr_0.8         stringr_1.4.0     httr_1.4.2       
-## [17] tools_4.0.3       grid_4.0.3        webshot_0.5.2     xfun_0.19        
-## [21] htmltools_0.5.0   systemfonts_0.3.2 yaml_2.2.1        assertthat_0.2.1 
-## [25] rprojroot_2.0.2   digest_0.6.27     lifecycle_0.2.0   pkgdown_1.6.1    
-## [29] crayon_1.3.4      textshaping_0.2.1 Matrix_1.2-18     kableExtra_1.3.1 
-## [33] fs_1.5.0          memoise_1.1.0     glue_1.4.2        evaluate_0.14    
-## [37] rmarkdown_2.5     stringi_1.5.3     compiler_4.0.3    scales_1.1.1     
-## [41] desc_1.2.0</code></pre>
+##  [1] compiler_4.0.3    highr_0.8         tools_4.0.3       digest_0.6.27    
+##  [5] lattice_0.20-41   evaluate_0.14     memoise_2.0.0     lifecycle_0.2.0  
+##  [9] viridisLite_0.3.0 rlang_0.4.10      Matrix_1.2-18     rstudioapi_0.13  
+## [13] yaml_2.2.1        pkgdown_1.6.1     xfun_0.20         fastmap_1.1.0    
+## [17] kableExtra_1.3.1  stringr_1.4.0     httr_1.4.2        knitr_1.31       
+## [21] xml2_1.3.2        desc_1.2.0        fs_1.5.0          systemfonts_1.0.0
+## [25] rprojroot_2.0.2   webshot_0.5.2     grid_4.0.3        glue_1.4.2       
+## [29] R6_2.5.0          textshaping_0.2.1 rmarkdown_2.6     magrittr_2.0.1   
+## [33] scales_1.1.1      htmltools_0.5.1.1 splines_4.0.3     assertthat_0.2.1 
+## [37] rvest_0.3.6       colorspace_2.0-0  ragg_0.4.1        stringi_1.5.3    
+## [41] munsell_0.5.0     cachem_1.0.1      crayon_1.4.0</code></pre>
 </div>
 <div id="references" class="section level1 unnumbered">
 <h1 class="hasAnchor">
