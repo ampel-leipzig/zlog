@@ -1,5 +1,10 @@
 # zlog 0.0
 
+## Changes in 0.0.10
+
+- `z` gains a `log` argument (default: `FALSE`) and `zlog` is now an alias for
+  `z(..., log = TRUE)`.
+
 ## Changes in 0.0.9
 
 - Add support for multiple reference parameters in `lookup_limits`.

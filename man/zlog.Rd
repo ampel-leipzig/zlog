@@ -5,7 +5,7 @@
 \alias{zlog}
 \title{Calculate z/zlog Values}
 \usage{
-z(x, limits, probs = c(0.025, 0.975))
+z(x, limits, probs = c(0.025, 0.975), log = FALSE)
 
 zlog(x, limits, probs = c(0.025, 0.975))
 }
@@ -19,6 +19,9 @@ elements in \code{x}.}
 \item{probs}{\code{numeric}, probabilities of the lower and upper reference limit,
 default: \code{c(0.025, 0.975)} (spanning 95 \%). Has to be of length 2 for
 \code{numeric} or a two-column \code{matrix} with as many rows as elements in \code{x}.}
+
+\item{log}{\code{logical}, should z (\code{log = FALSE}, default) or
+z(log) (\code{log = TRUE}) calculated?}
 }
 \value{
 \code{numeric}, z or z(log) values.
@@ -35,6 +38,8 @@ and 0.975 quantiles):
 The z(log) value is calculated as follows (assuming that the limits where 0.025
 and 0.975 quantiles):
 \eqn{z = (\log(x) - (\log(limits_1) + \log(limits_2))/2) * 3.92/(\log(limits_2) - \log(limits_1))}.
+
+\code{zlog} is an alias for \code{z(..., log = TRUE)}.
 }
 \examples{
 z(1:10, limits = c(2, 8))

@@ -10,6 +10,8 @@
 #' @param probs `numeric`, probabilities of the lower and upper reference limit,
 #' default: `c(0.025, 0.975)` (spanning 95 %). Has to be of length 2 for
 #' `numeric` or a two-column `matrix` with as many rows as elements in `x`.
+#' @param log `logical`, should z (`log = FALSE`, default) or
+#' z(log) (`log = TRUE`) calculated?
 #'
 #' @details
 #' The z value is calculated as follows (assuming that the limits where 0.025
@@ -19,6 +21,8 @@
 #' The z(log) value is calculated as follows (assuming that the limits where 0.025
 #' and 0.975 quantiles):
 #' \eqn{z = (\log(x) - (\log(limits_1) + \log(limits_2))/2) * 3.92/(\log(limits_2) - \log(limits_1))}.
+#'
+#' `zlog` is an alias for `z(..., log = TRUE)`.
 #'
 #' @return `numeric`, z or z(log) values.
 #' @rdname zlog
@@ -35,7 +39,7 @@
 #' @examples
 #' z(1:10, limits = c(2, 8))
 #'
-z <- function(x, limits, probs = c(0.025, 0.975)) {
+z <- function(x, limits, probs = c(0.025, 0.975), log = FALSE) {
     if (!(is.numeric(limits) && length(limits) == 2L) &&
         !(is.matrix(limits) && mode(limits) == "numeric" &&
           nrow(limits) == length(x) && ncol(limits) == 2L))
@@ -55,6 +59,11 @@ z <- function(x, limits, probs = c(0.025, 0.975)) {
 
     if (!is.matrix(probs))
         probs <- t(probs)
+
+    if (log) {
+        x <- log(x)
+        limits <- log(limits)
+    }
 
     m <- (limits[, 1L] + limits[, 2L]) / 2L
     s <- abs(limits[, 2L] - limits[, 1L]) / rowSums(abs(qnorm(probs)))
@@ -77,7 +86,5 @@ z <- function(x, limits, probs = c(0.025, 0.975)) {
 #' )
 #' zlog(c(albumin, bilirubin), limits = limits)
 zlog <- function(x, limits, probs = c(0.025, 0.975)) {
-    if (missing(limits))
-        stop("argument \"limits\" is missing, with no default")
-    z(log(x), log(limits), probs)
+    z(x, limits, probs, log = TRUE)
 }
