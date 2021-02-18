@@ -126,6 +126,7 @@ reference <- data.frame(
     param = c("albumin", rep("bilirubin", 4)),
     age = c(0, 1, 2, 3, 7),     # days
     sex = "both",
+    units = c("g/l", rep("µmol/l", 4)), # ignored
     lower = c(35, rep(NA, 4)),  # no real reference values
     upper = c(52, 5, 8, 13, 18) # no real reference values
 )
@@ -136,6 +137,13 @@ lookup_limits(
     age = 18 * 365.25,
     sex = "female",
     table = reference[reference$param == "albumin",]
+)
+
+# lookup albumin and bilirubin values for 18 year old woman
+lookup_limits(
+    age = 18 * 365.25,
+    sex = "female",
+    table = reference
 )
 
 # lookup bilirubin reference values for infants

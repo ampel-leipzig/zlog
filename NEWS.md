@@ -1,5 +1,9 @@
 # zlog 0.0
 
+## Changes in 0.0.9
+
+- Add support for multiple reference parameters in `lookup_limits`.
+
 ## Changes in 0.0.8
 
 - Add *z* and *z(log)* equation to vignette.

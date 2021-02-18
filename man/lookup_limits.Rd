@@ -17,7 +17,9 @@ lookup_limits(age, sex, table)
 matches all ages),
 "sex", \code{factor} (same levels for male and female as \code{sex} and a special level
 \code{"both"}), "lower" and "upper", \code{numeric} for the lower and upper reference
-limits. Additional columns are allowed.}
+limits. If an "param" column is given the "lower" and "upper" limits for all
+different values in "param" is returned. Additional columns are allowed (and
+ignored).}
 }
 \value{
 \code{matrix}, with 2 columns ("lower", "upper") and as many rows as
@@ -33,6 +35,7 @@ reference <- data.frame(
     param = c("albumin", rep("bilirubin", 4)),
     age = c(0, 1, 2, 3, 7),     # days
     sex = "both",
+    units = c("g/l", rep("µmol/l", 4)), # ignored
     lower = c(35, rep(NA, 4)),  # no real reference values
     upper = c(52, 5, 8, 13, 18) # no real reference values
 )
@@ -42,6 +45,13 @@ lookup_limits(
     age = 18 * 365.25,
     sex = "female",
     table = reference[reference$param == "albumin",]
+)
+
+# lookup albumin and bilirubin values for 18 year old woman
+lookup_limits(
+    age = 18 * 365.25,
+    sex = "female",
+    table = reference
 )
 
 # lookup bilirubin referenc values for infants

@@ -12,7 +12,9 @@
 #' matches all ages),
 #' "sex", `factor` (same levels for male and female as `sex` and a special level
 #' `"both"`), "lower" and "upper", `numeric` for the lower and upper reference
-#' limits. Additional columns are allowed.
+#' limits. If an "param" column is given the "lower" and "upper" limits for all
+#' different values in "param" is returned. Additional columns are allowed (and
+#' ignored).
 #'
 #' @return `matrix`, with 2 columns ("lower", "upper") and as many rows as
 #' `length(age)`.
@@ -24,6 +26,7 @@
 #'     param = c("albumin", rep("bilirubin", 4)),
 #'     age = c(0, 1, 2, 3, 7),     # days
 #'     sex = "both",
+#'     units = c("g/l", rep("µmol/l", 4)), # ignored
 #'     lower = c(35, rep(NA, 4)),  # no real reference values
 #'     upper = c(52, 5, 8, 13, 18) # no real reference values
 #' )
@@ -33,6 +36,13 @@
 #'     age = 18 * 365.25,
 #'     sex = "female",
 #'     table = reference[reference$param == "albumin",]
+#' )
+#'
+#' # lookup albumin and bilirubin values for 18 year old woman
+#' lookup_limits(
+#'     age = 18 * 365.25,
+#'     sex = "female",
+#'     table = reference
 #' )
 #'
 #' # lookup bilirubin referenc values for infants
@@ -52,7 +62,8 @@ lookup_limits <- function(age, sex, table) {
         stop("'sex' has to be a factor of at most 2 levels ",
              "(male, female).")
 
-    if (!all(c("age", "sex", "lower", "upper") %in% colnames(table)))
+    cn <- colnames(table)
+    if (!all(c("age", "sex", "lower", "upper") %in% cn))
         stop("'table' has to have the columns: ",
              "\"age\", \"sex\", \"upper\", \"lower\".")
 
@@ -61,20 +72,37 @@ lookup_limits <- function(age, sex, table) {
         stop("'table$sex' has to be a factor of at most 3 levels ",
              "(male, female, both).")
 
-    table <- table[order(table$age, decreasing = TRUE),]
+    if (!"param" %in% cn)
+        table$param <- "param"
+
+    table <- table[order(table$age, table$param, decreasing = TRUE),]
+
+    params <- unique(table$param)
+    nparam <- length(params)
+    nage <- length(age)
 
     limits <- matrix(
-        NA_real_, nrow = length(age), ncol = 2L,
-        dimnames = list(NULL, c("lower", "upper"))
+        NA_real_, nrow = nage * nparam, ncol = 2L,
+        dimnames = list(
+                if (nparam > 1L || params != "param")
+                    rep(params, each = nage)
+                else
+                    NULL,
+                c("lower", "upper")
+        )
     )
 
-    for (i in seq(along = age)) {
-        j <- which(
-            (sex[i] == table$sex | table$sex == "both") &
-                age[i] >= table$age
-        )[1L]
-        if (length(j))
-            limits[i, ] <- c(table$lower[j], table$upper[j])
+    for (i in seq(along = params)) {
+        for (j in seq(along = age)) {
+            k <- which(
+                (sex[j] == table$sex | table$sex == "both") &
+                age[j] >= table$age & params[i] == table$param
+            )[1L]
+            if (length(k))
+                limits[(i - 1) * nage + j, ] <-
+                    c(table$lower[k], table$upper[k])
+        }
     }
+
     limits
 }
