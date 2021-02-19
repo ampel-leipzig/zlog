@@ -74,7 +74,7 @@ this database." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">zlog</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.11</span>
       </span>
     </div>
 
@@ -143,7 +143,9 @@ this database.</p>
 matches all ages),
 "sex", <code>factor</code> (same levels for male and female as <code>sex</code> and a special level
 <code>"both"</code>), "lower" and "upper", <code>numeric</code> for the lower and upper reference
-limits. Additional columns are allowed.</p></td>
+limits. If an "param" column is given the "lower" and "upper" limits for all
+different values in "param" is returned. Additional columns are allowed (and
+ignored).</p></td>
     </tr>
     </table>
 
@@ -160,6 +162,7 @@ limits. Additional columns are allowed.</p></td>
     param <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"albumin"</span>, <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"bilirubin"</span>, <span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>,
     age <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>3</span>, <span class='fl'>7</span><span class='op'>)</span>,     <span class='co'># days</span>
     sex <span class='op'>=</span> <span class='st'>"both"</span>,
+    units <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"g/l"</span>, <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"µmol/l"</span>, <span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>, <span class='co'># ignored</span>
     lower <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>35</span>, <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='cn'>NA</span>, <span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>,  <span class='co'># no real reference values</span>
     upper <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>52</span>, <span class='fl'>5</span>, <span class='fl'>8</span>, <span class='fl'>13</span>, <span class='fl'>18</span><span class='op'>)</span> <span class='co'># no real reference values</span>
 <span class='op'>)</span>
@@ -170,24 +173,33 @@ limits. Additional columns are allowed.</p></td>
     sex <span class='op'>=</span> <span class='st'>"female"</span>,
     table <span class='op'>=</span> <span class='va'>reference</span><span class='op'>[</span><span class='va'>reference</span><span class='op'>$</span><span class='va'>param</span> <span class='op'>==</span> <span class='st'>"albumin"</span>,<span class='op'>]</span>
 <span class='op'>)</span>
-</div><div class='output co'>#&gt;      lower upper
-#&gt; [1,]    35    52</div><div class='input'>
+</div><div class='output co'>#&gt;         lower upper
+#&gt; albumin    35    52</div><div class='input'>
+<span class='co'># lookup albumin and bilirubin values for 18 year old woman</span>
+<span class='fu'>lookup_limits</span><span class='op'>(</span>
+    age <span class='op'>=</span> <span class='fl'>18</span> <span class='op'>*</span> <span class='fl'>365.25</span>,
+    sex <span class='op'>=</span> <span class='st'>"female"</span>,
+    table <span class='op'>=</span> <span class='va'>reference</span>
+<span class='op'>)</span>
+</div><div class='output co'>#&gt;           lower upper
+#&gt; bilirubin    NA    18
+#&gt; albumin      35    52</div><div class='input'>
 <span class='co'># lookup bilirubin referenc values for infants</span>
 <span class='fu'>lookup_limits</span><span class='op'>(</span>
     age <span class='op'>=</span> <span class='fl'>0</span><span class='op'>:</span><span class='fl'>8</span>,
     sex <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"female"</span>, <span class='st'>"male"</span><span class='op'>)</span>, <span class='fl'>5</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>)</span>,
     table <span class='op'>=</span> <span class='va'>reference</span><span class='op'>[</span><span class='va'>reference</span><span class='op'>$</span><span class='va'>param</span> <span class='op'>==</span> <span class='st'>"bilirubin"</span>,<span class='op'>]</span>
 <span class='op'>)</span>
-</div><div class='output co'>#&gt;       lower upper
-#&gt;  [1,]    NA    NA
-#&gt;  [2,]    NA     5
-#&gt;  [3,]    NA     8
-#&gt;  [4,]    NA    13
-#&gt;  [5,]    NA    13
-#&gt;  [6,]    NA    13
-#&gt;  [7,]    NA    13
-#&gt;  [8,]    NA    18
-#&gt;  [9,]    NA    18</div></pre>
+</div><div class='output co'>#&gt;           lower upper
+#&gt; bilirubin    NA    NA
+#&gt; bilirubin    NA     5
+#&gt; bilirubin    NA     8
+#&gt; bilirubin    NA    13
+#&gt; bilirubin    NA    13
+#&gt; bilirubin    NA    13
+#&gt; bilirubin    NA    13
+#&gt; bilirubin    NA    18
+#&gt; bilirubin    NA    18</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

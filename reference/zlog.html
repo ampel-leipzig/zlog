@@ -73,7 +73,7 @@ as proposed in Hoffmann 2017 et al." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">zlog</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.11</span>
       </span>
     </div>
 
@@ -120,7 +120,7 @@ as proposed in Hoffmann 2017 et al." />
 as proposed in Hoffmann 2017 et al.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>z</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>limits</span>, probs <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.025</span>, <span class='fl'>0.975</span><span class='op'>)</span><span class='op'>)</span>
+    <pre class="usage"><span class='fu'>z</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>limits</span>, probs <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.025</span>, <span class='fl'>0.975</span><span class='op'>)</span>, log <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 
 <span class='fu'>zlog</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>limits</span>, probs <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.025</span>, <span class='fl'>0.975</span><span class='op'>)</span><span class='op'>)</span></pre>
 
@@ -129,7 +129,7 @@ as proposed in Hoffmann 2017 et al.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p><code>numeric</code>, laboratory values</p></td>
+      <td><p><code>numeric</code>, laboratory values.</p></td>
     </tr>
     <tr>
       <th>limits</th>
@@ -142,6 +142,11 @@ elements in <code>x</code>.</p></td>
       <td><p><code>numeric</code>, probabilities of the lower and upper reference limit,
 default: <code><a href='https://rdrr.io/r/base/c.html'>c(0.025, 0.975)</a></code> (spanning 95 %). Has to be of length 2 for
 <code>numeric</code> or a two-column <code>matrix</code> with as many rows as elements in <code>x</code>.</p></td>
+    </tr>
+    <tr>
+      <th>log</th>
+      <td><p><code>logical</code>, should z (<code>log = FALSE</code>, default) or
+z(log) (<code>log = TRUE</code>) calculated?</p></td>
     </tr>
     </table>
 
@@ -156,6 +161,7 @@ and 0.975 quantiles):
 <p>The z(log) value is calculated as follows (assuming that the limits where 0.025
 and 0.975 quantiles):
 \(z = (\log(x) - (\log(limits_1) + \log(limits_2))/2) * 3.92/(\log(limits_2) - \log(limits_1))\).</p>
+<p><code>zlog</code> is an alias for <code>z(..., log = TRUE)</code>.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Hoffmann, Georg, Frank Klawonn, Ralf Lichtinghagen, and Matthias Orth.
