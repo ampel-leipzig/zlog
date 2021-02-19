@@ -10,7 +10,7 @@ z(x, limits, probs = c(0.025, 0.975), log = FALSE)
 zlog(x, limits, probs = c(0.025, 0.975))
 }
 \arguments{
-\item{x}{\code{numeric}, laboratory values}
+\item{x}{\code{numeric}, laboratory values.}
 
 \item{limits}{\code{numeric} or \code{matrix}, lower and upper reference limits. Has to
 be of length 2 for \code{numeric} or a two-column \code{matrix} with as many rows as

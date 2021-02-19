@@ -3,7 +3,7 @@
 #' Calculates the z or z(log) values for laboratory measurement standardisation
 #' as proposed in Hoffmann 2017 et al.
 #'
-#' @param x `numeric`, laboratory values
+#' @param x `numeric`, laboratory values.
 #' @param limits `numeric` or `matrix`, lower and upper reference limits. Has to
 #' be of length 2 for `numeric` or a two-column `matrix` with as many rows as
 #' elements in `x`.
