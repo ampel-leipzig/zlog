@@ -198,19 +198,14 @@ for (i in seq_len(nrow(reference))) {
 knitr::kable(reference)
 ```
 
-Subsequently we can convert the laboratory measurements into *z(log)*-values:
+Subsequently we can convert the laboratory measurements into *z(log)*-values
+using the `zlog_df` function that applies the `zlog` for every `numeric` column
+in a `data.frame` (except the `"age"` column):
 
 ```{r pbc_zlog}
-## loop through all laboratory values and lookup their reference limits
-pbc[labs] <- lapply(labs, function(l) {
-    rl <- lookup_limits(
-        age = pbc$age,
-        sex = pbc$sex,
-        table = reference[reference$param == l,]
-    )
-    zlog(pbc[, l], limits = rl)
-})
+pbc <- zlog_df(pbc, reference)
 ```
+
 ```{r pbc_table, echo = FALSE}
 pbctbl <- head(pbc, n = 25)
 pbctbl[labs] <- lapply(labs, function(l) {

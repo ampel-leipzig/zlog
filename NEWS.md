@@ -1,5 +1,11 @@
 # zlog 0.0
 
+## Changes in 0.0.11
+
+- Add `z_df` and `zlog_df` as convenient wrapper around `z`/`zlog` and
+  `lookup_limits` for larger `data.frame`s and reference tables.
+- Fix ordering in `lookup_limits` if a `"param"` column is given.
+
 ## Changes in 0.0.10
 
 - `z` gains a `log` argument (default: `FALSE`) and `zlog` is now an alias for
