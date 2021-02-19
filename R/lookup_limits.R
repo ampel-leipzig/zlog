@@ -75,7 +75,7 @@ lookup_limits <- function(age, sex, table) {
     if (!"param" %in% cn)
         table$param <- "param"
 
-    table <- table[order(table$age, table$param, decreasing = TRUE),]
+    table <- table[order(table$age, decreasing = TRUE),]
 
     params <- unique(table$param)
     nparam <- length(params)
