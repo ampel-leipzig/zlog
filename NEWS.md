@@ -1,5 +1,10 @@
 # zlog 0.0
 
+## Changes in 0.0.12
+
+- `z_df` and `zlog_df` now accept a reference table `limits` with more
+  parameters (`params`) than present in the `x` `data.frame`.
+
 ## Changes in 0.0.11
 
 - Add `z_df` and `zlog_df` as convenient wrapper around `z`/`zlog` and

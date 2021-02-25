@@ -21,12 +21,12 @@ test_that("z_df throws errors", {
 
 test_that("z_df/zlog_df", {
     l <- data.frame(
-        param = c("alb", "bili"),
-        age = c(0, 0),
-        sex = c("both", "both"),
-        units = c("mg/l", "µmol/l"),
-        lower = c(35, 2),
-        upper = c(52, 21)
+        param = c("alb", "bili", "hbg"),
+        age = c(0, 0, 0),
+        sex = c("both", "both", "both"),
+        units = c("mg/l", "µmol/l", "mmol/l"),
+        lower = c(35, 2, 8),
+        upper = c(52, 21, 12)
     )
     x <- data.frame(
         age = 40:48,

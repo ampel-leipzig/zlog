@@ -88,6 +88,8 @@ z_df <- function(x, limits, probs = c(0.025, 0.975), log = FALSE) {
             cbind.data.frame(param = na, age = 0L, sex = "both")
     }
 
+    limits <- limits[limits$param %in% cnx[num],]
+
     x[num] <- z(
         as.matrix(x[num]),
         lookup_limits(x$age, x$sex, limits),
