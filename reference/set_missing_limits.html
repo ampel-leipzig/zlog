@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Lookup Limits in Reference Tables — lookup_limits • zlog</title>
+<title>Set Missing Limits in Reference Tables — set_missing_limits • zlog</title>
 
 
 <!-- jquery -->
@@ -39,10 +39,12 @@
 
 
 
-<meta property="og:title" content="Lookup Limits in Reference Tables — lookup_limits" />
-<meta property="og:description" content="Reference limits are specific for age and sex. Each laboratory institute has
-its own reference limits. This function is useful to query a dataset against
-this database." />
+<meta property="og:title" content="Set Missing Limits in Reference Tables — set_missing_limits" />
+<meta property="og:description" content="Sometimes reference limits are not specified. That is often the case for
+biomarkers that are related to infection or cancer. Using zero as lower
+boundary results in skewed distributions (Hoffmann et al. 2017; fig. 7).
+Haeckel et al. 2015 suggested to set the lower reference limit to 0.15 of
+the upper one." />
 
 
 
@@ -111,48 +113,57 @@ this database." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Lookup Limits in Reference Tables</h1>
+    <h1>Set Missing Limits in Reference Tables</h1>
     
-    <div class="hidden name"><code>lookup_limits.Rd</code></div>
+    <div class="hidden name"><code>set_missing_limits.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Reference limits are specific for age and sex. Each laboratory institute has
-its own reference limits. This function is useful to query a dataset against
-this database.</p>
+    <p>Sometimes reference limits are not specified. That is often the case for
+biomarkers that are related to infection or cancer. Using zero as lower
+boundary results in skewed distributions (Hoffmann et al. 2017; fig. 7).
+Haeckel et al. 2015 suggested to set the lower reference limit to 0.15 of
+the upper one.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>lookup_limits</span><span class='op'>(</span><span class='va'>age</span>, <span class='va'>sex</span>, <span class='va'>table</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>set_missing_limits</span><span class='op'>(</span><span class='va'>x</span>, fraction <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.15</span>, <span class='fl'>20</span><span class='op'>/</span><span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>age</th>
-      <td><p><code>numeric</code>, patient age.</p></td>
-    </tr>
-    <tr>
-      <th>sex</th>
-      <td><p><code>character</code>/<code>factor</code>, patient sex, has to be the same length as
-<code>age</code>.</p></td>
-    </tr>
-    <tr>
-      <th>table</th>
+      <th>x</th>
       <td><p><code>data.frame</code>, reference table, has to have the columns:
-"age", <code>numeric</code> (same units as in <code>age</code>, e.g. days or years, age of <code>0</code>
-matches all ages),
-"sex", <code>factor</code> (same levels for male and female as <code>sex</code> and a special level
-<code>"both"</code>), "lower" and "upper", <code>numeric</code> for the lower and upper reference
-limits. If an "param" column is given the "lower" and "upper" limits for all
-different values in "param" is returned. Additional columns are allowed (and
-ignored).</p></td>
+"lower" and "upper", <code>numeric</code> for the lower and upper reference
+limits.  Additional columns are allowed (and ignored).</p></td>
+    </tr>
+    <tr>
+      <th>fraction</th>
+      <td><p><code><a href='https://rdrr.io/r/base/numeric.html'>numeric(2)</a></code>, targeted fraction of the lower to the upper and
+the upper to the lower limit. Haeckel et al. 2015 suggested to set the lower
+limit to 0.15 of the upper one. We choose 20/3 (the reciprocal of 0.15) for
+the upper to the lower one.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>matrix</code>, with 2 columns ("lower", "upper") and as many rows as
-<code><a href='https://rdrr.io/r/base/length.html'>length(age)</a></code>.</p>
+    <p><code>data.frame</code>, the same as <code>x</code> but the "lower" and "upper" columns are
+modified if there were <code>NA</code> before.</p>
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    <p>Georg Hoffmann, Frank Klawonn, Ralf Lichtinghagen, and Matthias Orth.
+2017.
+"The Zlog-Value as Basis for the Standardization of Laboratory Results."
+LaboratoriumsMedizin 41 (1): 23–32.
+doi: <a href='https://doi.org/10.1515/labmed-2016-0087'>10.1515/labmed-2016-0087</a>
+.</p>
+<p>Rainer Haeckel, Werner Wosniok, Ebrhard Gurr und Burkhard Peil.
+2015.
+"Permissible limits for uncertainty of measurement in laboratory medicine"
+Clinical Chemistry and Laboratory Medicine 53 (8): 1161-1171.
+doi: <a href='https://doi.org/10.1515/cclm-2014-0874'>10.1515/cclm-2014-0874</a>
+.</p>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
     <p>Sebastian Gibb</p>
@@ -160,46 +171,25 @@ ignored).</p></td>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='va'>reference</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>
     param <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"albumin"</span>, <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"bilirubin"</span>, <span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>,
-    age <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>3</span>, <span class='fl'>7</span><span class='op'>)</span>,     <span class='co'># days</span>
-    sex <span class='op'>=</span> <span class='st'>"both"</span>,
+    age <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>3</span>, <span class='fl'>7</span><span class='op'>)</span>,             <span class='co'># ignored</span>
+    sex <span class='op'>=</span> <span class='st'>"both"</span>,                       <span class='co'># ignored</span>
     units <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"g/l"</span>, <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"µmol/l"</span>, <span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>, <span class='co'># ignored</span>
     lower <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>35</span>, <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='cn'>NA</span>, <span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>,  <span class='co'># no real reference values</span>
     upper <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>52</span>, <span class='fl'>5</span>, <span class='fl'>8</span>, <span class='fl'>13</span>, <span class='fl'>18</span><span class='op'>)</span> <span class='co'># no real reference values</span>
 <span class='op'>)</span>
-
-<span class='co'># lookup albumin reference values for 18 year old woman</span>
-<span class='fu'>lookup_limits</span><span class='op'>(</span>
-    age <span class='op'>=</span> <span class='fl'>18</span> <span class='op'>*</span> <span class='fl'>365.25</span>,
-    sex <span class='op'>=</span> <span class='st'>"female"</span>,
-    table <span class='op'>=</span> <span class='va'>reference</span><span class='op'>[</span><span class='va'>reference</span><span class='op'>$</span><span class='va'>param</span> <span class='op'>==</span> <span class='st'>"albumin"</span>,<span class='op'>]</span>
-<span class='op'>)</span>
-</div><div class='output co'>#&gt;         lower upper
-#&gt; albumin    35    52</div><div class='input'>
-<span class='co'># lookup albumin and bilirubin values for 18 year old woman</span>
-<span class='fu'>lookup_limits</span><span class='op'>(</span>
-    age <span class='op'>=</span> <span class='fl'>18</span> <span class='op'>*</span> <span class='fl'>365.25</span>,
-    sex <span class='op'>=</span> <span class='st'>"female"</span>,
-    table <span class='op'>=</span> <span class='va'>reference</span>
-<span class='op'>)</span>
-</div><div class='output co'>#&gt;           lower upper
-#&gt; bilirubin    NA    18
-#&gt; albumin      35    52</div><div class='input'>
-<span class='co'># lookup bilirubin referenc values for infants</span>
-<span class='fu'>lookup_limits</span><span class='op'>(</span>
-    age <span class='op'>=</span> <span class='fl'>0</span><span class='op'>:</span><span class='fl'>8</span>,
-    sex <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"female"</span>, <span class='st'>"male"</span><span class='op'>)</span>, <span class='fl'>5</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>)</span>,
-    table <span class='op'>=</span> <span class='va'>reference</span><span class='op'>[</span><span class='va'>reference</span><span class='op'>$</span><span class='va'>param</span> <span class='op'>==</span> <span class='st'>"bilirubin"</span>,<span class='op'>]</span>
-<span class='op'>)</span>
-</div><div class='output co'>#&gt;           lower upper
-#&gt; bilirubin    NA    NA
-#&gt; bilirubin    NA     5
-#&gt; bilirubin    NA     8
-#&gt; bilirubin    NA    13
-#&gt; bilirubin    NA    13
-#&gt; bilirubin    NA    13
-#&gt; bilirubin    NA    13
-#&gt; bilirubin    NA    18
-#&gt; bilirubin    NA    18</div></pre>
+<span class='fu'>set_missing_limits</span><span class='op'>(</span><span class='va'>reference</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;       param age  sex  units lower upper
+#&gt; 1   albumin   0 both    g/l 35.00    52
+#&gt; 2 bilirubin   1 both µmol/l  0.75     5
+#&gt; 3 bilirubin   2 both µmol/l  1.20     8
+#&gt; 4 bilirubin   3 both µmol/l  1.95    13
+#&gt; 5 bilirubin   7 both µmol/l  2.70    18</div><div class='input'><span class='fu'>set_missing_limits</span><span class='op'>(</span><span class='va'>reference</span>, fraction <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.2</span>, <span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;       param age  sex  units lower upper
+#&gt; 1   albumin   0 both    g/l  35.0    52
+#&gt; 2 bilirubin   1 both µmol/l   1.0     5
+#&gt; 3 bilirubin   2 both µmol/l   1.6     8
+#&gt; 4 bilirubin   3 both µmol/l   2.6    13
+#&gt; 5 bilirubin   7 both µmol/l   3.6    18</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

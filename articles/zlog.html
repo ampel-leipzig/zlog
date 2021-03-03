@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">zlog</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.12</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.13</span>
       </span>
     </div>
 
@@ -487,11 +487,34 @@ NA
 ## bilirubin    NA    18
 ## bilirubin    NA    18</code></pre>
 </div>
+<div id="missing-reference-limits" class="section level1">
+<h1 class="hasAnchor">
+<a href="#missing-reference-limits" class="anchor"></a>Missing Reference Limits</h1>
+<p>Sometimes reference limits are not specified. That is often the case for biomarkers that are related to infection or cancer. Using zero as lower boundary results in skewed distributions <span class="citation">(Hoffmann et al. 2017, fig. 7)</span>. <span class="citation">Haeckel et al. (2015)</span> suggested to set the lower reference limit to 15 % of the upper one.</p>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># use default fractions</span>
+<span class="fu"><a href="../reference/set_missing_limits.html">set_missing_limits</a></span><span class="op">(</span><span class="va">reference</span><span class="op">)</span></code></pre></div>
+<pre><code>##       param age  sex  units lower upper
+## 1   albumin   0 both    g/l 35.00    52
+## 2 bilirubin   1 both µmol/l  0.75     5
+## 3 bilirubin   2 both µmol/l  1.20     8
+## 4 bilirubin   3 both µmol/l  1.95    13
+## 5 bilirubin   7 both µmol/l  2.70    18</code></pre>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># set fractions manually</span>
+<span class="fu"><a href="../reference/set_missing_limits.html">set_missing_limits</a></span><span class="op">(</span><span class="va">reference</span>, fraction <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<pre><code>##       param age  sex  units lower upper
+## 1   albumin   0 both    g/l  35.0    52
+## 2 bilirubin   1 both µmol/l   1.0     5
+## 3 bilirubin   2 both µmol/l   1.6     8
+## 4 bilirubin   3 both µmol/l   2.6    13
+## 5 bilirubin   7 both µmol/l   3.6    18</code></pre>
+</div>
 <div id="pbc-example" class="section level1">
 <h1 class="hasAnchor">
 <a href="#pbc-example" class="anchor"></a><code>PBC</code> Example</h1>
 <p>For demonstration we choose the <code>pbc</code> dataset from the <code>survival</code> package and exclude all non-laboratory measurements except <em>age</em> and <em>sex</em>:</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/therneau/survival">"survival"</a></span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"pbc"</span><span class="op">)</span>
 <span class="va">labs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
@@ -750,7 +773,7 @@ NA
 </tbody>
 </table>
 <p>Next we estimate all reference limits from the data. We want to use sex-specific values for copper and aspartate aminotransferase (<code>"ast"</code>).</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## replicate copper and ast 2 times, use the others just once</span>
 <span class="va">param</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="va">labs</span>, <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">labs</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"copper"</span>, <span class="st">"ast"</span><span class="op">)</span>, <span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
 <span class="va">sex</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep_len</a></span><span class="op">(</span><span class="st">"both"</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">param</span><span class="op">)</span><span class="op">)</span>
@@ -982,7 +1005,7 @@ both
 </tbody>
 </table>
 <p>Subsequently we can convert the laboratory measurements into <em>z(log)</em>-values using the <code>zlog_df</code> function that applies the <code>zlog</code> for every <code>numeric</code> column in a <code>data.frame</code> (except the <code>"age"</code> column):</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">pbc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/z_df.html">zlog_df</a></span><span class="op">(</span><span class="va">pbc</span>, <span class="va">reference</span><span class="op">)</span></code></pre></div>
 <table class="table  lightable-classic">
 <thead><tr>
@@ -1902,7 +1925,7 @@ f
 <div id="session-information" class="section level1">
 <h1 class="hasAnchor">
 <a href="#session-information" class="anchor"></a>Session information</h1>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code>## R version 4.0.4 (2021-02-15)
 ## Platform: x86_64-apple-darwin17.0 (64-bit)
@@ -1919,7 +1942,7 @@ f
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] survival_3.2-7 zlog_0.0.12   
+## [1] survival_3.2-7 zlog_0.0.13   
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] compiler_4.0.4    highr_0.8         tools_4.0.4       digest_0.6.27    
@@ -1938,6 +1961,9 @@ f
 <h1 class="hasAnchor">
 <a href="#references" class="anchor"></a>References</h1>
 <div id="refs" class="references">
+<div id="ref-haeckel2015">
+<p>Haeckel, Rainer, Werner Wosniok, Ebrhard Gurr, and Burkhard Peil. 2015. “Permissible Limits for Uncertainty of Measurement in Laboratory Medicine.” <em>Clinical Chemistry and Laboratory Medicine</em> 53 (8): 1161–71. <a href="https://doi.org/10.1515/cclm-2014-0874">https://doi.org/10.1515/cclm-2014-0874</a>.</p>
+</div>
 <div id="ref-hoffmann2017">
 <p>Hoffmann, Georg, Frank Klawonn, Ralf Lichtinghagen, and Matthias Orth. 2017. “The Zlog-Value as Basis for the Standardization of Laboratory Results.” <em>LaboratoriumsMedizin</em> 41 (1): 23–32. <a href="https://doi.org/10.1515/labmed-2016-0087">https://doi.org/10.1515/labmed-2016-0087</a>.</p>
 </div>
