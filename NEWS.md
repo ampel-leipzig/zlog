@@ -2,6 +2,7 @@
 
 ## Changes in 0.0.13
 
+- Add `set_missing_limits`.
 - Fix first author name of reference in manual pages for `zcol`, `zlog` and
   `zlog_df`.
 

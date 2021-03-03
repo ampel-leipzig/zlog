@@ -154,6 +154,22 @@ lookup_limits(
 )
 ```
 
+# Missing Reference Limits
+
+Sometimes reference limits are not specified. That is often the case for
+biomarkers that are related to infection or cancer. Using zero as lower
+boundary results in skewed distributions [@hoffmann2017, fig. 7].
+@haeckel2015 suggested to set the lower reference limit to 15 % of
+the upper one.
+
+```{r missing_reference}
+# use default fractions
+set_missing_limits(reference)
+
+# set fractions manually
+set_missing_limits(reference, fraction = c(0.2, 5))
+```
+
 # `PBC` Example
 
 For demonstration we choose the `pbc` dataset from the `survival` package
