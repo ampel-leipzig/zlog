@@ -1,5 +1,10 @@
 # zlog 0.0
 
+## Changes in 0.0.13
+
+- Fix first author name of reference in manual pages for `zcol`, `zlog` and
+  `zlog_df`.
+
 ## Changes in 0.0.12
 
 - `z_df` and `zlog_df` now accept a reference table `limits` with more

@@ -24,10 +24,11 @@
 #' @rdname izlog
 #' @author Sebastian Gibb
 #' @references
-#' Hoffmann, Georg, Frank Klawonn, Ralf Lichtinghagen, and Matthias Orth.
+#' Georg Hoffmann, Frank Klawonn, Ralf Lichtinghagen, and Matthias Orth.
 #' 2017.
 #' "The Zlog-Value as Basis for the Standardization of Laboratory Results."
-#' LaboratoriumsMedizin 41 (1): 23–32. \doi{10.1515/labmed-2016-0087}.
+#' LaboratoriumsMedizin 41 (1): 23–32.
+#' \doi{10.1515/labmed-2016-0087}.
 #' @seealso [`zlog()`]
 #'
 #' @importFrom stats qnorm
