@@ -65,4 +65,18 @@ test_that("lookup_limits works for multiple parameters", {
         ),
         limits
     )
+
+    # bug in zlog 0.0.13 (rev 25527b2), lookup_limits resorts param depending on
+    # age
+    reftbl <- data.frame(
+        age = 1:2,
+        sex = rep("both", 2),
+        param = c("bar", "foo"),
+        lower = 1:2,
+        upper = 3:4
+    )
+    limits <- cbind(lower = 1:2, upper = 3:4)
+    rownames(limits) <- reftbl$param
+
+    expect_equal(lookup_limits(age = 10, sex = "f", reftbl), limits)
 })

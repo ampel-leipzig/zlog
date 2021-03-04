@@ -75,11 +75,11 @@ lookup_limits <- function(age, sex, table) {
     if (!"param" %in% cn)
         table$param <- "param"
 
-    table <- table[order(table$age, decreasing = TRUE),]
-
     params <- unique(table$param)
     nparam <- length(params)
     nage <- length(age)
+
+    table <- table[order(table$age, decreasing = TRUE),]
 
     limits <- matrix(
         NA_real_, nrow = nage * nparam, ncol = 2L,
