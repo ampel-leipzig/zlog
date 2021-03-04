@@ -1,5 +1,12 @@
 # zlog 0.0
 
+## Changes in 0.0.14
+
+- Fix for `lookup_limits` that reordered its results depending on the "age"
+  column in the "table" argument.
+- Fix for `z_df` and `z_logdf` now correctly handle the ordering of the
+  `matrix` returned by `lookup_limits`.
+
 ## Changes in 0.0.13
 
 - Add `set_missing_limits`.
