@@ -43,9 +43,15 @@ test_that("z_df/zlog_df", {
     )
     expect_equal(zlog_df(x, l), r)
 
-    x <- cbind(x, wbc = 8, alat = 0.5)
-    r <- cbind(r, wbc = NA_real_, alat = NA_real_)
-    expect_warning(w <- zlog_df(x, l), "wbc, alat")
-    expect_equal(w, r)
-})
+    xw <- cbind(x, wbc = 8, alat = 0.5)
+    rw <- cbind(r, wbc = NA_real_, alat = NA_real_)
+    expect_warning(w <- zlog_df(xw, l), "wbc, alat")
+    expect_equal(w, rw)
 
+    # bug in zlog 0.0.13 (rev 25527b2), zlog_df ignores order of lookup_limits
+    # results
+    l2 <- l[c(2, 3, 1),]
+    rownames(l2) <- NULL
+    expect_equal(zlog_df(x, l2), r)
+
+})

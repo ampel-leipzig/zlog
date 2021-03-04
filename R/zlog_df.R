@@ -90,9 +90,10 @@ z_df <- function(x, limits, probs = c(0.025, 0.975), log = FALSE) {
     }
 
     limits <- limits[limits$param %in% cnx[num],]
+    prms <- unique(limits$param)
 
-    x[num] <- z(
-        as.matrix(x[num]),
+    x[prms] <- z(
+        as.matrix(x[prms]),
         lookup_limits(x$age, x$sex, limits),
         probs = probs,
         log = log
