@@ -57,47 +57,10 @@
 #' z_df(x, l)
 #'
 z_df <- function(x, limits, probs = c(0.025, 0.975), log = FALSE) {
-    if (!is.data.frame(x)) {
-        stop("'x' has to be a data.frame.")
-    }
+    limits <- .lookup_limits_df(x, limits)
+    prms <- unique(rownames(limits))
 
-    cnx <- colnames(x)
-
-    if (!"age" %in% cnx)
-        stop("Column \"age\" is missing in 'x'.")
-    if (!"sex" %in% cnx)
-        stop("Column \"sex\" is missing in 'x'.")
-
-    cnl <- colnames(limits)
-
-    if (!is.data.frame(limits) ||
-        !all(c("age", "sex", "param", "lower", "upper") %in% cnl))
-        stop("'limits' has to be a data.frame with the following columns: ",
-             "\"age\", \"sex\", \"param\", \"upper\", \"lower\".\n",
-             "See '?lookup_limits' for details.")
-
-    num <- vapply(x, is.numeric, FALSE, USE.NAMES = FALSE) &
-        !cnx %in% c("age", "sex")
-
-    if (any(!cnx[num] %in% limits$param)) {
-        na <- cnx[num & (!cnx %in% limits$param)]
-        warning(
-            "No reference for column(s): ", paste0(na, collapse = ", ")
-        )
-        ina <- nrow(limits) + seq_len(length(na))
-        limits[ina, c("param", "age", "sex")] <-
-            cbind.data.frame(param = na, age = 0L, sex = "both")
-    }
-
-    limits <- limits[limits$param %in% cnx[num],]
-    prms <- unique(limits$param)
-
-    x[prms] <- z(
-        as.matrix(x[prms]),
-        lookup_limits(x$age, x$sex, limits),
-        probs = probs,
-        log = log
-    )
+    x[prms] <- z(as.matrix(x[prms]), limits, probs = probs, log = log)
     x
 }
 

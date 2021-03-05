@@ -80,3 +80,64 @@ test_that("lookup_limits works for multiple parameters", {
 
     expect_equal(lookup_limits(age = 10, sex = "f", reftbl), limits)
 })
+
+test_that(".lookup_limits_df throws errors", {
+    expect_error(.lookup_limits_df(1:10), "data.frame")
+    expect_error(
+        .lookup_limits_df(data.frame(alb = 1, bili = 2), data.frame()),
+        ".*age.* .* missing"
+    )
+    expect_error(
+        .lookup_limits_df(data.frame(age = 1, alb = 1, bili = 2), data.frame()),
+        ".*sex.* .* missing"
+    )
+    expect_error(
+        .lookup_limits_df(data.frame(age = 1, sex = "f", alb = 1, bili = 2), 1),
+        ".*data.frame.*"
+    )
+    expect_error(
+        .lookup_limits_df(
+            data.frame(age = 1, sex = "f", alb = 1, bili = 2),
+            data.frame()
+        ),
+        "with the following columns: "
+    )
+
+})
+
+test_that(".lookup_limits_df works", {
+    l <- data.frame(
+        param = c("alb", "bili", "hbg"),
+        age = c(0, 0, 0),
+        sex = c("both", "both", "both"),
+        units = c("mg/l", "µmol/l", "mmol/l"),
+        lower = c(35, 2, 8),
+        upper = c(52, 21, 12)
+    )
+    x <- data.frame(
+        age = 40:48,
+        sex = rep(c("female", "male"), c(5, 4)),
+        # from Hoffmann et al. 2017
+        alb = c(42, 34, 38, 43, 50, 42, 27, 31, 24),
+        bili = c(11, 9, 2, 5, 22, 42, 37, 200, 20)
+    )
+    r <- matrix(
+        rep(c(35, 2, 52, 21), each = 9), nrow = 18,
+        dimnames = list(rep(c("alb", "bili"), each = 9), c("lower", "upper"))
+    )
+    expect_equal(.lookup_limits_df(x, l), r)
+
+    xw <- cbind(x, wbc = 8, alat = 0.5)
+    rw <- r[]
+    rw[] <- NA_real_
+    rownames(rw) <- rep(c("wbc", "alat"), each = 9)
+    rw <- rbind(r, rw)
+    expect_warning(w <- .lookup_limits_df(xw, l), "wbc, alat")
+    expect_equal(w, rw)
+
+    # bug in zlog 0.0.13 (rev 25527b2), lookup_limits resorts param depending on
+    # age
+    l2 <- l[c(2, 3, 1),]
+    rownames(l2) <- NULL
+    expect_equal(.lookup_limits_df(x, l2), r[rev(seq_len(nrow(r))),])
+})

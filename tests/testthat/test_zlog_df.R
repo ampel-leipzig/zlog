@@ -53,5 +53,4 @@ test_that("z_df/zlog_df", {
     l2 <- l[c(2, 3, 1),]
     rownames(l2) <- NULL
     expect_equal(zlog_df(x, l2), r)
-
 })

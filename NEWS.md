@@ -1,5 +1,11 @@
 # zlog 0.0
 
+## Changes in 0.0.15
+
+- No user-visible changes.
+- Move reference lookup code from `z_df`/`zlog_df` to the internal
+  `.lookup_limits_df` function.
+
 ## Changes in 0.0.14
 
 - Fix for `lookup_limits` that reordered its results depending on the "age"

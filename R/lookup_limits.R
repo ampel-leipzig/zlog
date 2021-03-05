@@ -106,3 +106,48 @@ lookup_limits <- function(age, sex, table) {
 
     limits
 }
+
+#' Lookup Limits in Reference Tables for a Whole data.frame
+#'
+#' internal function
+#'
+#' @param x `data.frame`
+#' @param table `data.frame`, reference table, format see above
+#' @return see above
+#'
+#' @noRd
+.lookup_limits_df <- function(x, limits) {
+    if (!is.data.frame(x)) {
+        stop("'x' has to be a data.frame.")
+    }
+
+    cnx <- colnames(x)
+
+    if (!"age" %in% cnx)
+        stop("Column \"age\" is missing in 'x'.")
+    if (!"sex" %in% cnx)
+        stop("Column \"sex\" is missing in 'x'.")
+
+    cnl <- colnames(limits)
+
+    if (!is.data.frame(limits) ||
+        !all(c("age", "sex", "param", "lower", "upper") %in% cnl))
+        stop("'limits' has to be a data.frame with the following columns: ",
+             "\"age\", \"sex\", \"param\", \"upper\", \"lower\".\n",
+             "See '?lookup_limits' for details.")
+
+    num <- vapply(x, is.numeric, FALSE, USE.NAMES = FALSE) &
+        !cnx %in% c("age", "sex")
+
+    if (any(!cnx[num] %in% limits$param)) {
+        na <- cnx[num & (!cnx %in% limits$param)]
+        warning(
+            "No reference for column(s): ", paste0(na, collapse = ", ")
+        )
+        ina <- nrow(limits) + seq_len(length(na))
+        limits[ina, c("param", "age", "sex")] <-
+            cbind.data.frame(param = na, age = 0L, sex = "both")
+    }
+
+    lookup_limits(x$age, x$sex, limits[limits$param %in% cnx[num],])
+}

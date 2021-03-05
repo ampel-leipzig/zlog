@@ -1,6 +1,6 @@
 Package: zlog
 Title: Z(log) Transformation for Laboratory Measurements
-Version: 0.0.14
+Version: 0.0.15
 Description: Transformation of Laboratory Measurements into z or z(log)-value
     based on given or empirical reference limits as proposed in
     Hoffmann et al. 2017 (DOI: 10.1515/labmed-2016-0087).
