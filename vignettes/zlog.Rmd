@@ -170,6 +170,24 @@ set_missing_limits(reference)
 set_missing_limits(reference, fraction = c(0.2, 5))
 ```
 
+# Impute Missing Laboratory Measurements
+
+If laboratory measurements are missing they could be imputed using *"normal"*
+values from the reference table. Using the `"logmean"` (default) or `"mean"`
+reference value (default) will result in a $zlog$ or $z$-value of zero,
+respectively.
+
+```{r impute_missing_values}
+x <- data.frame(
+    age = c(40, 50),
+    sex = c("female", "male"),
+    albumin = c(42, NA)
+)
+x
+z_df(impute_df(x, reference, method = "mean"), reference)
+zlog_df(impute_df(x, reference), reference)
+```
+
 # `PBC` Example
 
 For demonstration we choose the `pbc` dataset from the `survival` package
@@ -214,7 +232,17 @@ for (i in seq_len(nrow(reference))) {
 knitr::kable(reference)
 ```
 
-Subsequently we can convert the laboratory measurements into *z(log)*-values
+The `pbc` dataset contains a few missing values. We impute the with the
+corresponding mean reference value (which is in this example just the sample
+mean but would be in real life the mean of a e.g. healthy subpopulation).
+
+```{r pbc_impute}
+pbc[c(6, 14),]
+pbc <- impute_df(pbc, reference)
+pbc[c(6, 14),]
+```
+
+Subsequently we can convert the laboratory measurements into $z(log)$-values
 using the `zlog_df` function that applies the `zlog` for every `numeric` column
 in a `data.frame` (except the `"age"` column):
 

@@ -1,5 +1,9 @@
 # zlog 0.0
 
+## Changes in 0.0.16
+
+- Add `impute_df` to impute missing values with there correct reference values.
+
 ## Changes in 0.0.15
 
 - No user-visible changes.
