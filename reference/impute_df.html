@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Calculate z/zlog Values for a data.frame — z_df • zlog</title>
+<title>Imputation — impute_df • zlog</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,8 @@
 
 
 
-<meta property="og:title" content="Calculate z/zlog Values for a data.frame — z_df" />
-<meta property="og:description" content="Calculates the z or z(log) values for laboratory measurement standardisation
-as proposed in Hoffmann 2017 et al. for a complete data.frame." />
+<meta property="og:title" content="Imputation — impute_df" />
+<meta property="og:description" content="Impute NA values with the logmean, mean, minimal or maximum reference value." />
 
 
 
@@ -110,19 +109,16 @@ as proposed in Hoffmann 2017 et al. for a complete data.frame." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Calculate z/zlog Values for a data.frame</h1>
+    <h1>Imputation</h1>
     
-    <div class="hidden name"><code>zlog_df.Rd</code></div>
+    <div class="hidden name"><code>impute_df.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Calculates the z or z(log) values for laboratory measurement standardisation
-as proposed in Hoffmann 2017 et al. for a complete <code>data.frame</code>.</p>
+    <p>Impute <code>NA</code> values with the logmean, mean, minimal or maximum reference value.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>z_df</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>limits</span>, probs <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.025</span>, <span class='fl'>0.975</span><span class='op'>)</span>, log <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-
-<span class='fu'>zlog_df</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>limits</span>, probs <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.025</span>, <span class='fl'>0.975</span><span class='op'>)</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>impute_df</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>limits</span>, method <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"logmean"</span>, <span class='st'>"mean"</span>, <span class='st'>"min"</span>, <span class='st'>"max"</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -130,7 +126,7 @@ as proposed in Hoffmann 2017 et al. for a complete <code>data.frame</code>.</p>
     <tr>
       <th>x</th>
       <td><p><code>data.frame</code>, with the columns: "age", <code>numeric</code>, "sex", <code>factor</code>
-and more user defined <code>numeric</code> columns that should be z/z(log) transformed.</p></td>
+and more user defined <code>numeric</code> columns that should be imputed.</p></td>
     </tr>
     <tr>
       <th>limits</th>
@@ -143,39 +139,20 @@ to match the column name in <code>x</code>, "lower" and "upper", <code>numeric</
 lower and upper reference limits.</p></td>
     </tr>
     <tr>
-      <th>probs</th>
-      <td><p><code>numeric</code>, probabilities of the lower and upper reference limit,
-default: <code><a href='https://rdrr.io/r/base/c.html'>c(0.025, 0.975)</a></code> (spanning 95 %). Has to be of length 2 for
-<code>numeric</code> or a two-column <code>matrix</code> with as many rows as elements in <code>x</code>.</p></td>
-    </tr>
-    <tr>
-      <th>log</th>
-      <td><p><code>logical</code>, should z (<code>log = FALSE</code>, default) or
-z(log) (<code>log = TRUE</code>) calculated?</p></td>
+      <th>method</th>
+      <td><p><code>character</code>, imputation method. <code>method = "logmean"</code> (default)
+replaces all <code>NA</code> with its corresponding logged mean values for the reference
+table <code>limits</code> (for subsequent use of the <em>zlog</em> score,
+use <code>method = "mean" for *z* score calculation). For </code>method = "min"<code>or</code>method = "max"` the lower or the upper limits are
+used.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p><code>data.frame</code>, with the columns: "age", "sex" and all <code>numeric</code>
-columns z/zlog transformed. If a column name is missing in <code>limits$param</code>
-a warning is thrown and the column is set to <code>NA</code>.</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>This is a wrapper function for <code><a href='z.html'>z()</a></code> and <code><a href='lookup_limits.html'>lookup_limits()</a></code>. Please find
-the details for the z/z(log) calculation at <code><a href='z.html'>z()</a></code>.</p>
-<p><code>zlog_df</code> is an alias for <code>z_df(..., log = TRUE)</code>.</p>
-    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
-
-    <p>Georg Hoffmann, Frank Klawonn, Ralf Lichtinghagen, and Matthias Orth.
-2017.
-"The Zlog-Value as Basis for the Standardization of Laboratory Results."
-LaboratoriumsMedizin 41 (1): 23–32.
-doi: <a href='https://doi.org/10.1515/labmed-2016-0087'>10.1515/labmed-2016-0087</a>
-.</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><code><a href='z.html'>zlog()</a></code></p></div>
+    <p>Imputation should be done prior to <code><a href='z.html'>z()</a></code>/<code><a href='z.html'>zlog()</a></code> transformation.
+Afterwards the <code>NA</code> could replaced by zero (for mean-imputation) via
+<code>d[is.na(d)] &lt;- 0</code>.</p>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
     <p>Sebastian Gibb</p>
@@ -193,31 +170,40 @@ doi: <a href='https://doi.org/10.1515/labmed-2016-0087'>10.1515/labmed-2016-0087
     age <span class='op'>=</span> <span class='fl'>40</span><span class='op'>:</span><span class='fl'>48</span>,
     sex <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"female"</span>, <span class='st'>"male"</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>5</span>, <span class='fl'>4</span><span class='op'>)</span><span class='op'>)</span>,
     <span class='co'># from Hoffmann et al. 2017</span>
-    alb <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>42</span>, <span class='fl'>34</span>, <span class='fl'>38</span>, <span class='fl'>43</span>, <span class='fl'>50</span>, <span class='fl'>42</span>, <span class='fl'>27</span>, <span class='fl'>31</span>, <span class='fl'>24</span><span class='op'>)</span>,
-    bili <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>11</span>, <span class='fl'>9</span>, <span class='fl'>2</span>, <span class='fl'>5</span>, <span class='fl'>22</span>, <span class='fl'>42</span>, <span class='fl'>37</span>, <span class='fl'>200</span>, <span class='fl'>20</span><span class='op'>)</span>
+    alb <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>42</span>, <span class='cn'>NA</span>, <span class='fl'>38</span>, <span class='cn'>NA</span>, <span class='fl'>50</span>, <span class='fl'>42</span>, <span class='fl'>27</span>, <span class='fl'>31</span>, <span class='fl'>24</span><span class='op'>)</span>,
+    bili <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>11</span>, <span class='fl'>9</span>, <span class='cn'>NA</span>, <span class='cn'>NA</span>, <span class='fl'>22</span>, <span class='fl'>42</span>, <span class='cn'>NA</span>, <span class='fl'>200</span>, <span class='fl'>20</span><span class='op'>)</span>
 <span class='op'>)</span>
-<span class='fu'>z_df</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>l</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;   age    sex       alb      bili
-#&gt; 1  40 female -0.345876 -0.103156
-#&gt; 2  41 female -2.190548 -0.515780
-#&gt; 3  42 female -1.268212 -1.959964
-#&gt; 4  43 female -0.115292 -1.341028
-#&gt; 5  44 female  1.498796  2.166276
-#&gt; 6  45   male -0.345876  6.292516
-#&gt; 7  46   male -3.804636  5.260956
-#&gt; 8  47   male -2.882300 38.889812
-#&gt; 9  48   male -4.496388  1.753652</div><div class='input'>
-<span class='fu'>zlog_df</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>l</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;   age    sex         alb       bili
-#&gt; 1  40 female -0.15472223  0.8819855
-#&gt; 2  41 female -2.24698167  0.5474516
-#&gt; 3  42 female -1.14569028 -1.9599640
-#&gt; 4  43 female  0.07826303 -0.4324351
-#&gt; 5  44 female  1.57162335  2.0375165
-#&gt; 6  45   male -0.15472223  3.1154950
-#&gt; 7  46   male -4.52949253  2.9041899
-#&gt; 8  47   male -3.16160843  5.7172179
-#&gt; 9  48   male -5.69571148  1.8786269</div></pre>
+<span class='fu'>impute_df</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>l</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   age    sex      alb       bili
+#&gt; 1  40 female 42.00000  11.000000
+#&gt; 2  41 female 42.66146   9.000000
+#&gt; 3  42 female 38.00000   6.480741
+#&gt; 4  43 female 42.66146   6.480741
+#&gt; 5  44 female 50.00000  22.000000
+#&gt; 6  45   male 42.00000  42.000000
+#&gt; 7  46   male 27.00000   6.480741
+#&gt; 8  47   male 31.00000 200.000000
+#&gt; 9  48   male 24.00000  20.000000</div><div class='input'><span class='fu'>impute_df</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>l</span>, method <span class='op'>=</span> <span class='st'>"min"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   age    sex alb bili
+#&gt; 1  40 female  42   11
+#&gt; 2  41 female  35    9
+#&gt; 3  42 female  38    2
+#&gt; 4  43 female  35    2
+#&gt; 5  44 female  50   22
+#&gt; 6  45   male  42   42
+#&gt; 7  46   male  27    2
+#&gt; 8  47   male  31  200
+#&gt; 9  48   male  24   20</div><div class='input'><span class='fu'><a href='z_df.html'>zlog_df</a></span><span class='op'>(</span><span class='fu'>impute_df</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>l</span><span class='op'>)</span>, <span class='va'>l</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   age    sex        alb      bili
+#&gt; 1  40 female -0.1547222 0.8819855
+#&gt; 2  41 female  0.0000000 0.5474516
+#&gt; 3  42 female -1.1456903 0.0000000
+#&gt; 4  43 female  0.0000000 0.0000000
+#&gt; 5  44 female  1.5716234 2.0375165
+#&gt; 6  45   male -0.1547222 3.1154950
+#&gt; 7  46   male -4.5294925 0.0000000
+#&gt; 8  47   male -3.1616084 5.7172179
+#&gt; 9  48   male -5.6957115 1.8786269</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
