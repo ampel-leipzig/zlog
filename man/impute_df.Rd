@@ -24,6 +24,11 @@ table \code{limits} (for subsequent use of the \emph{zlog} score,
 use \verb{method = "mean" for *z* score calculation). For }method = "min"\code{or}method = "max"` the lower or the upper limits are
 used.}
 }
+\value{
+\code{data.frame}, the same as \code{x} but missing values are replaced by
+the corresponding logmean, mean, minimal or maximal reference values
+depending on the chosen \code{method}.
+}
 \description{
 Impute \code{NA} values with the logmean, mean, minimal or maximum reference value.
 }

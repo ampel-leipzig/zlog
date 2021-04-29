@@ -22,6 +22,9 @@
 #' Imputation should be done prior to [`z()`]/[`zlog()`] transformation.
 #' Afterwards the `NA` could replaced by zero (for mean-imputation) via
 #' `d[is.na(d)] <- 0`.
+#' @return `data.frame`, the same as `x` but missing values are replaced by
+#' the corresponding logmean, mean, minimal or maximal reference values
+#' depending on the chosen `method`.
 #'
 #' @author Sebastian Gibb
 #' @export
