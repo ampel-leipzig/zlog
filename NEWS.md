@@ -1,3 +1,9 @@
+# zlog 1.0
+
+## Changes in 1.0.0
+
+- First CRAN release.
+
 # zlog 0.0
 
 ## Changes in 0.0.16
