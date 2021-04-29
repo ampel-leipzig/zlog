@@ -24,7 +24,7 @@
 #' LaboratoriumsMedizin 41 (1): 23–32.
 #' \doi{10.1515/labmed-2016-0087}.
 #'
-#' Rainer Haeckel, Werner Wosniok, Ebrhard Gurr und Burkhard Peil.
+#' Rainer Haeckel, Werner Wosniok, Ebrhard Gurr and Burkhard Peil.
 #' 2015.
 #' "Permissible limits for uncertainty of measurement in laboratory medicine"
 #' Clinical Chemistry and Laboratory Medicine 53 (8): 1161-1171.
