@@ -4,8 +4,9 @@
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![license](http://img.shields.io/badge/license-GPL%20%28%3E=%203%29-brightgreen.svg?style=flat)](http://www.gnu.org/licenses/gpl-3.0.html)
 [![R build status](https://github.com/ampel-leipzig/zlog/workflows/R-CMD-check/badge.svg)](https://github.com/ampel-leipzig/zlog/actions)
-[![Codecov test
-coverage](https://codecov.io/gh/ampel-leipzig/zlog/branch/main/graph/badge.svg)](https://codecov.io/gh/ampel-leipzig/zlog?branch=main)
+[![Codecov test coverage](https://codecov.io/gh/ampel-leipzig/zlog/branch/main/graph/badge.svg)](https://codecov.io/gh/ampel-leipzig/zlog?branch=main)
+[![cran checks](https://cranchecks.info/badges/worst/zlog)](https://cran.r-project.org/web/checks/check_results_zlog.html)
+[![metacran version](http://www.r-pkg.org/badges/version/zlog)](http://cran.r-project.org/web/packages/zlog/index.html)
 <!-- badges: end -->
 
 Transformation of Laboratory Measurements into z(log)-values
