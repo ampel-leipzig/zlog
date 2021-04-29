@@ -7,6 +7,7 @@
 [![Codecov test coverage](https://codecov.io/gh/ampel-leipzig/zlog/branch/main/graph/badge.svg)](https://codecov.io/gh/ampel-leipzig/zlog?branch=main)
 [![cran checks](https://cranchecks.info/badges/worst/zlog)](https://cran.r-project.org/web/checks/check_results_zlog.html)
 [![metacran version](http://www.r-pkg.org/badges/version/zlog)](http://cran.r-project.org/web/packages/zlog/index.html)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4727117.svg)](https://doi.org/10.5281/zenodo.4727117)
 <!-- badges: end -->
 
 Transformation of Laboratory Measurements into z(log)-values
