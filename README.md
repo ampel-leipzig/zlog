@@ -22,12 +22,22 @@ Basic usage: https://ampel-leipzig.github.io/zlog/articles/zlog.html
 
 ## Install
 
-Currently this package is in development and just available via the github
-repository.
-
-To install the latest development version use:
+You can install the latest release directly from
+[CRAN](http://cran.r-project.org/package=zlog).
 
 ```r
+install.packages("zlog")
+```
+
+## Install development version (not recommended)
+
+[GitHub](https://github.com) is not directly supported by the basic
+`install.packages` command. You could use the
+[remotes](http://cran.r-project.org/package=remotes) package
+to install the development version of `zlog`.
+
+```r
+install.packages("remotes")
 remotes::install_github("ampel-leipzig/zlog")
 ```
 
