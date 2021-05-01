@@ -1,5 +1,9 @@
 # zlog 1.0
 
+## Changes in 1.0.1
+
+- Add URL and BugReport URL to DESCRIPTION file.
+
 ## Changes in 1.0.0
 
 - First CRAN release.
