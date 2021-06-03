@@ -62,7 +62,7 @@ lookup_limits <- function(age, sex, table) {
         stop("'sex' has to be a factor of at most 2 levels ",
              "(male, female).")
 
-    cn <- colnames(table)
+    cn <- colnames(table) <- tolower(colnames(table))
     if (!all(c("age", "sex", "lower", "upper") %in% cn))
         stop("'table' has to have the columns: ",
              "\"age\", \"sex\", \"upper\", \"lower\".")
@@ -121,14 +121,14 @@ lookup_limits <- function(age, sex, table) {
         stop("'x' has to be a data.frame.")
     }
 
-    cnx <- colnames(x)
+    cnx <- colnames(x) <- tolower(colnames(x))
 
     if (!"age" %in% cnx)
         stop("Column \"age\" is missing in 'x'.")
     if (!"sex" %in% cnx)
         stop("Column \"sex\" is missing in 'x'.")
 
-    cnl <- colnames(limits)
+    cnl <- tolower(colnames(limits))
 
     if (!is.data.frame(limits) ||
         !all(c("age", "sex", "param", "lower", "upper") %in% cnl))

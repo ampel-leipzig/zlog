@@ -140,4 +140,14 @@ test_that(".lookup_limits_df works", {
     l2 <- l[c(2, 3, 1),]
     rownames(l2) <- NULL
     expect_equal(.lookup_limits_df(x, l2), r[rev(seq_len(nrow(r))),])
+
+    # x with uppercase Age/Sex columns
+    xu <- x
+    colnames(xu)[1:2] <- c("Age", "Sex")
+    expect_equal(.lookup_limits_df(xu, l), r)
+
+    # l with uppercase Age/Sex columns
+    lu <- l
+    colnames(lu)[2:3] <- c("Age", "Sex")
+    expect_equal(.lookup_limits_df(x, lu), r)
 })
