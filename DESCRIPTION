@@ -1,7 +1,7 @@
 Package: zlog
 Title: Z(log) Transformation for Laboratory Measurements
-Version: 1.0.1.9000
-Date: 2021-06-03
+Version: 1.0.2
+Date: 2022-12-28
 Description: Transformation of laboratory measurements into z or z(log)-value
     based on given or empirical reference limits as proposed in
     Hoffmann et al. 2017 <doi:10.1515/labmed-2016-0087>.
@@ -20,7 +20,7 @@ Suggests:
     testthat
 License: GPL (>= 3)
 Roxygen: list(markdown=TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.3
 URL: https://github.com/ampel-leipzig/zlog/
 BugReports: https://github.com/ampel-leipzig/zlog/issues/
 VignetteBuilder: knitr
