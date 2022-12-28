@@ -1,13 +1,16 @@
-# zlog 1.0 (2021-04-29)
+# zlog 1.0
 
-## Changes development version
+## Changes 1.0.2 (2022-12-28)
 
 - Ignore cases for the "age" and "sex" column names in
   `lookup_limits` and `.lookup_limits_df` (now case insensitive).
   Affected user visible functions: `zlog_df`, `impute_df`.
+
+## Changes 1.0.1 (2021-05-01)
+
 - Add URL and BugReport URL to DESCRIPTION file.
 
-## Changes in 1.0.0
+## Changes in 1.0.0 (2021-04-29)
 
 - First CRAN release.
 
